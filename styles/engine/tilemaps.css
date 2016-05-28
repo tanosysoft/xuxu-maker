@@ -1,0 +1,21 @@
+.xxmTilemap {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.xxmTile {
+    position: absolute;
+
+    left: calc(var(--x) * var(--tw));
+    top: calc(var(--y) * var(--th));
+
+    width: var(--tw);
+    height: var(--th);
+
+    background-image: var(--tilemap-href);
+    background-position: calc(-1 * var(--tsx) * var(--tw)) calc(-1 * var(--tsy) * var(--th));
+}

@@ -1,0 +1,17 @@
+body {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.xxmLayers {
+    width: calc((3 * 2 + 4) * var(--tw));
+    height: calc(4 * var(--th));
+
+    background-color: antiquewhite;
+
+    border-radius: 50px;
+}
