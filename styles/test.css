@@ -8,8 +8,8 @@ body {
 }
 
 .xxmLayers {
-    width: calc((3 * 2 + 4) * var(--tw));
-    height: calc(4 * var(--th));
+    width: calc(7 * var(--tw));
+    height: calc(7 * var(--th));
 
     background-color: antiquewhite;
 

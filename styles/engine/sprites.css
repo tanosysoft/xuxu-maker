@@ -1,0 +1,11 @@
+.xxmSprite {
+    position: absolute;
+
+    left: calc(var(--x) * var(--tw) - var(--ox));
+    top: calc(var(--y) * var(--th) - var(--oy));
+
+    width: var(--ssfw);
+    height: var(--ssfh);
+
+    background-position: calc(var(--ssx) * var(--ssfw)) calc(var(--ssy) * var(--ssfh));
+}
