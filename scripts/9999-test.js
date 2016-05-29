@@ -20,6 +20,8 @@ let $spr = xxm.sprites.create($layer2, {
     ssfh: '62px',
     ox: '39px',
     oy: '24px',
-}, 3, 4);
+}, 3, 4).addClass('xxmWalk');
+
+xxm.pc.select($spr);
 
 });

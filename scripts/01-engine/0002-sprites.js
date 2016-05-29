@@ -5,11 +5,14 @@ let exports = xxm.sprites = {};
 exports.create = ($parent, spec, x, y) => {
     let $el = $('<div>').addClass('xxmSprite');
 
-    {
-        let url = `${window.location}${spec.url}`;
-        $el.css('background-image', `url(${url})`);
-    }
+    xxm.setCssVar(
+        $el[0], 'sprite-url', `url("${window.location}${spec.url}")`
+    );
 
+    xxm.setCssVar($el[0], 'anim-duration', spec.animDuration || '0.7s');
+    xxm.setCssVar($el[0], 'walk-duration', spec.walkDuration || '0.5s');
+
+    xxm.setCssVar($el[0], 'ssfc', spec.ssfc || 4);
     xxm.setCssVar($el[0], 'ssfw', spec.ssfw || 32);
     xxm.setCssVar($el[0], 'ssfh', spec.ssfh || 48);
 

@@ -16,7 +16,7 @@ exports.create = ($parent, url) => {
             url = window.location + url;
         }
 
-        xxm.setCssVar($el[0], 'tilemap-href', 'url("' + url + '")');
+        xxm.setCssVar($el[0], 'tilemap-url', 'url("' + url + '")');
     }
 
     $parent.append($el);

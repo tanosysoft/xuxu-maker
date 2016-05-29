@@ -7,5 +7,15 @@ xxm.setCssVar = (el, name, val) => {
         originalStyle += ';';
     }
 
-    el.style = originalStyle + ' --' + name + ': ' + val + ';';
+    let re = new RegExp(`((^| *;| )--${name} *): *([^(;|$)]+)`, 'g');
+    let reRes = re.exec(originalStyle);
+
+    if(!reRes) {
+        el.style = originalStyle + ' --' + name + ': ' + val + ';';
+    }
+    else {
+        el.style = originalStyle.replace(
+            re, `$1: ${val}`
+        );
+    }
 };
