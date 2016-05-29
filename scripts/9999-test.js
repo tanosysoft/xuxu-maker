@@ -1,7 +1,6 @@
 'use strict'; $(() => {
 
 let $layer1 = xxm.layers.create(0);
-let $layer2 = xxm.layers.create(0);
 
 let $tilemap = xxm.tilemaps.create($layer1, 'test-tileset.png');
 
@@ -14,7 +13,7 @@ for(let i = 0; i < 2; ++i) {
     xxm.tilemaps.createTile($tilemap, 9, 3, j + 2, 2);
 }
 
-let $spr = xxm.sprites.create($layer2, {
+let $spr = xxm.sprites.create($tilemap, {
     url: 'DemonFighter.png',
     ssfw: '111px',
     ssfh: '62px',
