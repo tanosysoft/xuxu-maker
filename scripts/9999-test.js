@@ -2,7 +2,7 @@
 
 let $layer1 = xxm.layers.create(0);
 
-let $tilemap = xxm.tilemaps.create($layer1, 'test-tileset.png');
+let $tilemap = xxm.tilemaps.create($layer1, 1);
 
 for(let i = 0; i < 2; ++i) {
     let j = i * 3;
@@ -12,6 +12,9 @@ for(let i = 0; i < 2; ++i) {
     xxm.tilemaps.createTile($tilemap, 8, 3, j + 1, 2);
     xxm.tilemaps.createTile($tilemap, 9, 3, j + 2, 2);
 }
+
+xxm.tilemaps.createTile($tilemap, 1, 0, 3, 4);
+xxm.tilemaps.createTile($tilemap, 1, 1, 3, 5);
 
 let $spr = xxm.sprites.create($tilemap, {
     url: 'DemonFighter.png',

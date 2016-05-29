@@ -4,6 +4,7 @@ let exports = xxm.pc = {};
 
 let $currentEl;
 
+let keyDirection = 'none';
 let direction = 'none';
 
 exports.select = $el => {
@@ -24,21 +25,24 @@ $(() => {
     $body = $('body');
 
     let keyDirections = {
-        37: 'left',
-        38: 'up',
-        39: 'right',
-        40: 'down',
+        37: 'L', 38: 'U',
+        39: 'R', 40: 'D',
     };
 
     $body.keyup(ev => {
-        console.log(direction, keyDirections[ev.which]);
-        if(direction === keyDirections[ev.which]) {
-            direction = 'none';
+        if(keyDirection === keyDirections[ev.which]) {
+            direction = keyDirection = 'none';
         }
     });
 
     $body.keydown(ev => {
-        direction = keyDirections[ev.which] || 'none';
+        let newDirection = keyDirections[ev.which] || 'none';
+
+        if(newDirection === keyDirection) {
+            return;
+        }
+
+        direction = keyDirection = newDirection;
 
         if(direction !== 'none') {
             $currentEl.addClass('xxmAnimate');
@@ -48,48 +52,67 @@ $(() => {
 
 let raf = requestAnimationFrame;
 
-function getCssVar(n) {
-    return $currentEl[0].style.getPropertyValue(`--${n}`).trim();
+function getCssVar(n, type) {
+    return xxm.cssVar.get($currentEl[0], n, type);
 }
 
 function setCssVar(n, val) {
-    xxm.setCssVar($currentEl[0], n, val);
+    xxm.cssVar.set($currentEl[0], n, val);
 }
 
 function control() {
     raf(control);
 
-    if(!$currentEl || $currentEl.is('.xxmWalking')) {
+    if(!$currentEl || direction === 'none' || $currentEl.is('.xxmWalking')) {
         return;
     }
 
-    let x = parseInt(getCssVar('x'));
-    let y = parseInt(getCssVar('y'));
+    let x = getCssVar('x', 'int');
+    let y = getCssVar('y', 'int');
+
+    let $tiles = $currentEl.closest('.xxmTilemap').children('.xxmTile');
+
+    let shouldMove = xxm.tilemaps.testWalk($tiles, x, y, direction);
 
     switch(direction) {
-        case 'left':
-            setCssVar('x', x - 1);
+        case 'L':
             setCssVar('ssy', 3);
+
+            if(shouldMove) {
+                setCssVar('x', x - 1);
+            }
             break;
 
-        case 'up':
-            setCssVar('y', y - 1);
+        case 'U':
             setCssVar('ssy', 1);
+
+            if(shouldMove) {
+                setCssVar('y', y - 1);
+            }
             break;
 
-        case 'right':
-            setCssVar('x', x + 1);
+        case 'R':
             setCssVar('ssy', 2);
+
+            if(shouldMove) {
+                setCssVar('x', x + 1);
+            }
             break;
 
-        case 'down':
-            setCssVar('y', y + 1);
+        case 'D':
             setCssVar('ssy', 0);
+
+            if(shouldMove) {
+                setCssVar('y', y + 1);
+            }
             break;
     }
 
-    if(direction !== 'none') {
+    if(shouldMove) {
         $currentEl.addClass('xxmWalking');
+    }
+    else {
+        $currentEl.removeClass('xxmAnimate');
     }
 }
 

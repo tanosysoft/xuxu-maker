@@ -1,6 +1,22 @@
 'use strict';
 
-xxm.setCssVar = (el, name, val) => {
+let exports = xxm.cssVar = {};
+
+exports.get = (el, name, type) => {
+    let val = el.style.getPropertyValue(`--${name}`);
+
+    switch(type) {
+        case 'int': val = parseInt(val); break;
+        case 'float': val = parseFloat(val); break;
+        case undefined: break;
+
+        default: throw new Error(`Invalid type: ${type}`);
+    }
+
+    return val;
+};
+
+exports.set = (el, name, val) => {
     let originalStyle = el.style.cssText.trim();
 
     if(originalStyle && !originalStyle.endsWith(';')) {
