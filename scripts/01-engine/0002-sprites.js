@@ -25,6 +25,8 @@ exports.create = ($parent, spec, x, y) => {
     xxm.cssVar.set($el[0], 'x', x);
     xxm.cssVar.set($el[0], 'y', y);
 
+    $el.css('z-index', y - 1);
+
     $parent.append($el);
 
     return $el;

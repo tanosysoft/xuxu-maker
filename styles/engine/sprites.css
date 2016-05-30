@@ -8,8 +8,6 @@
     height: var(--ssfh);
 
     overflow: hidden;
-
-    z-index: calc(var(--y) - 1);
 }
 
 .xxmSprite:before {
