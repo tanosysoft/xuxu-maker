@@ -23,7 +23,8 @@
     height: 100%;
 
     background-image: var(--sprite-url);
-    background-position: 0 calc(var(--ssy) * var(--ssfh));
+    background-position-x: 0;
+    background-position-y: calc(var(--ssy) * var(--ssfh));
 }
 
 @keyframes frames {
