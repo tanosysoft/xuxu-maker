@@ -10,32 +10,19 @@
     overflow: hidden;
 }
 
-.xxmSprite:before {
-    position: absolute;
-
-    display: block;
-
-    content: '';
-
-    width: calc(100% * var(--ssfc));
-    height: 100%;
-
+.xxmSprite {
     background-image: var(--sprite-url);
     background-position-x: 0;
     background-position-y: calc(var(--ssy) * var(--ssfh));
 }
 
 @keyframes frames {
-    from {
-        left: 0;
-    }
-
     to {
-        left: calc(-1 * var(--ssfc) * var(--ssfw));
+        background-position-x: calc(-1 * var(--ssfc) * var(--ssfw));
     }
 }
 
-.xxmSprite.xxmAnimate:before {
+.xxmSprite.xxmAnimate {
     animation: frames steps(4, end) infinite;
     animation-duration: var(--anim-duration);
     animation-delay: calc(-1 * var(--anim-duration) / var(--ssfc));
