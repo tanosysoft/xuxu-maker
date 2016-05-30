@@ -16,14 +16,43 @@ for(let i = 0; i < 2; ++i) {
 xxm.tilemaps.createTile($tilemap, 1, 0, 3, 4);
 xxm.tilemaps.createTile($tilemap, 1, 1, 3, 5);
 
-let $spr = xxm.sprites.create($tilemap, {
+let $spr1 = xxm.sprites.create($tilemap, {
     url: 'DemonFighter.png',
     ssfw: '111px',
     ssfh: '62px',
     ox: '39px',
     oy: '24px',
-}, 3, 4).addClass('xxmWalk');
+}, 1, 4).addClass('xxmWalk');
 
-xxm.pc.select($spr);
+let $spr2 = xxm.sprites.create($tilemap, {
+    url: 'DemonFighter.png',
+    ssfw: '111px',
+    ssfh: '62px',
+    ox: '39px',
+    oy: '24px',
+}, 5, 4).addClass('xxmWalk');
+
+let $curSpr = $spr1;
+
+xxm.pc.select($curSpr);
+
+$('body').keyup(ev => {
+    if(ev.which !== 83) {
+        return;
+    }
+
+    if($curSpr.is('.xxmWalking')) {
+        return;
+    }
+
+    if($curSpr === $spr1) {
+        $curSpr = $spr2;
+    }
+    else {
+        $curSpr = $spr1;
+    }
+
+    xxm.pc.select($curSpr);
+});
 
 });

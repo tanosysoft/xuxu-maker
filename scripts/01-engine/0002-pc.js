@@ -36,9 +36,9 @@ $(() => {
     });
 
     $body.keydown(ev => {
-        let newDirection = keyDirections[ev.which] || 'none';
+        let newDirection = keyDirections[ev.which];
 
-        if(newDirection === keyDirection) {
+        if(!newDirection || newDirection === keyDirection) {
             return;
         }
 
