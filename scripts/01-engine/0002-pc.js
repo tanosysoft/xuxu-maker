@@ -18,9 +18,7 @@ exports.select = $el => {
             $currentEl.removeClass('xxmAnimate');
         }
 
-        console.log(lastDirection);
         if(lastDirection === 'D') {
-            console.log(1);
             $currentEl.css(
                 'z-index', xxm.cssVar.get($currentEl[0], 'y', 'int') - 1
             );
