@@ -5,12 +5,10 @@ let $layer1 = xxm.layers.create(0);
 let $tilemap = xxm.tilemaps.create($layer1, 1);
 
 for(let i = 0; i < 2; ++i) {
-    let j = i * 3;
+    let j = i * 2;
 
-    xxm.tilemaps.createTile($tilemap, 8, 2, j + 1, 1);
-    xxm.tilemaps.createTile($tilemap, 9, 2, j + 2, 1);
-    xxm.tilemaps.createTile($tilemap, 8, 3, j + 1, 2);
-    xxm.tilemaps.createTile($tilemap, 9, 3, j + 2, 2);
+    xxm.tilemaps.createTile($tilemap, 1, 2, j + 2, 1);
+    xxm.tilemaps.createTile($tilemap, 1, 3, j + 2, 2);
 }
 
 xxm.tilemaps.createTile($tilemap, 1, 0, 3, 4);
