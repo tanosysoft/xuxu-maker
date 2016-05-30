@@ -1,8 +1,8 @@
 'use strict'; $(() => {
 
-let $layer1 = xxm.layers.create(0);
+let $layer = xxm.layers.create(0).css('animation-iteration-count', 'infinite');
 
-let $tilemap = xxm.tilemaps.create($layer1, 1);
+let $tilemap = xxm.tilemaps.create($layer, 1);
 
 for(let i = 0; i < 2; ++i) {
     let j = i * 2;
@@ -51,6 +51,14 @@ $('body').keyup(ev => {
     }
 
     xxm.pc.select($curSpr);
+});
+
+$('body').keyup(ev => {
+    if(ev.which !== 69) {
+        return;
+    }
+
+    $layer.toggleClass('animated shake');
 });
 
 });
