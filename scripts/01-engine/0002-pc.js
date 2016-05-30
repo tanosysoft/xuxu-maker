@@ -82,7 +82,7 @@ function control() {
     let shouldMove = xxm.tilemaps.testWalk($tiles, x, y, direction);
 
     if(shouldMove && !$currentEl.is(':last-child')) {
-        $currentEl.parent().append($currentEl.detach());
+        $currentEl.parent().append($currentEl);
         setTimeout(update, 0);
     }
     else {
