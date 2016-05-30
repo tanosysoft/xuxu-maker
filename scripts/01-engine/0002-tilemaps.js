@@ -42,6 +42,10 @@ exports.createTile = ($parent, tsx, tsy, x, y) => {
     if(ts.highTiles.includes(`${tsx},${tsy}`)) {
         $el.css('z-index', 'var(--y)');
     }
+    else
+    if(ts.highTiles.includes(`${tsx},${tsy - 1}`)) {
+        $el.css('z-index', 'calc(var(--y) - 1)');
+    }
 
     $parent.append($el);
 
