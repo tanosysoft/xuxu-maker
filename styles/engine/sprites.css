@@ -11,7 +11,7 @@
 }
 
 .xxmSprite {
-    background-image: var(--spriteUrl);
+    background-image: var(--spritesetUrl);
     background-position-x: 0;
     background-position-y: calc(var(--ssy) * var(--ssfh));
 }

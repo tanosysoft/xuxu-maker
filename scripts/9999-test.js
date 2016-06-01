@@ -13,25 +13,8 @@ for(let i = 0; i < 2; ++i) {
     xxm.tilemaps.createTile($tilemap, 9, 3, j + 2, 2);
 }
 
-xxm.tilemaps.createTile($tilemap, 1, 0, 3, 4);
-xxm.tilemaps.createTile($tilemap, 1, 1, 3, 5);
-
-let $spr1 = xxm.sprites.create($tilemap, {
-    url: 'DemonFighter.png',
-    ssfw: '111px',
-    ssfh: '62px',
-    ox: '39px',
-    oy: '24px',
-}, 3, 3);
-
-let $spr2 = xxm.sprites.create($tilemap, {
-    url: 'DemonFighter.png',
-    ssfw: '111px',
-    ssfh: '62px',
-    ssy: 1,
-    ox: '39px',
-    oy: '24px',
-}, 3, 1);
+let $spr1 = xxm.sprites.create($tilemap, 1, 3, 3);
+let $spr2 = xxm.sprites.create($tilemap, 1, 3, 1);
 
 let $curSpr = $spr1;
 

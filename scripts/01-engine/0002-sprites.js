@@ -2,28 +2,30 @@
 
 let exports = xxm.sprites = {};
 
-exports.create = ($parent, spec, x, y) => {
+exports.create = ($parent, ssId, x, y) => {
     let $el = $('<div>').addClass('xxmSprite');
 
-    xxm.cssVar.set(
-        $el[0], 'spriteUrl', `url("${window.location}${spec.url}")`
-    );
+    let ss = xxm.db.spritesets[ssId];
 
-    xxm.cssVar.set($el[0], 'animDuration', spec.animDuration || '0.7s');
-    xxm.cssVar.set($el[0], 'walkDuration', spec.walkDuration || '0.5s');
+    xxm.cssVar.set($el[0], {
+        spritesetUrl: `url("${window.location}spritesets/${ss.name}.png")`,
 
-    xxm.cssVar.set($el[0], 'ssfc', spec.ssfc || 4);
-    xxm.cssVar.set($el[0], 'ssfw', spec.ssfw || 32);
-    xxm.cssVar.set($el[0], 'ssfh', spec.ssfh || 48);
+        ssfw: (ss.frameWidth || 32) + 'px',
+        ssfh: (ss.frameHeight || 38) + 'px',
 
-    xxm.cssVar.set($el[0], 'ssx', spec.ssx || 0);
-    xxm.cssVar.set($el[0], 'ssy', spec.ssy || 0);
+        ox: (ss.originX || 0) + 'px',
+        oy: (ss.originY || 0) + 'px',
 
-    xxm.cssVar.set($el[0], 'ox', spec.ox || 0);
-    xxm.cssVar.set($el[0], 'oy', spec.oy || 16);
+        ssx: 0,
+        ssy: 0,
 
-    xxm.cssVar.set($el[0], 'x', x);
-    xxm.cssVar.set($el[0], 'y', y);
+        ssfc: ss.frameCount || 4,
+
+        animDuration: ss.defaultAnimDuration || '0.7s',
+        walkDuration: ss.defaultWalkDuration || '0.5s',
+
+        x, y,
+    });
 
     $el.css('z-index', y - 1);
 

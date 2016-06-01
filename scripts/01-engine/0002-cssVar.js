@@ -16,7 +16,24 @@ exports.get = (el, name, type) => {
     return val;
 };
 
-exports.set = (el, name, val) => {
+exports.set = function() {
+    let args = xxm.overloaded(arguments, {
+        2: ['el', 'hash'],
+        3: ['el', 'name', 'val'],
+    });
+
+    let el = args.el;
+
+    if(args.hash) {
+        Object.keys(args.hash).forEach(
+            k => exports.set(el, k, args.hash[k])
+        );
+
+        return;
+    }
+
+    let { name, val } = args;
+
     let originalStyle = el.style.cssText.trim();
 
     if(originalStyle && !originalStyle.endsWith(';')) {
