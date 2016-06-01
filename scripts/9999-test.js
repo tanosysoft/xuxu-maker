@@ -13,8 +13,24 @@ for(let i = 0; i < 2; ++i) {
     xxm.tilemaps.createTile($tilemap, 9, 3, j + 2, 2);
 }
 
-let $spr1 = xxm.sprites.create($tilemap, 1, 3, 3);
-let $spr2 = xxm.sprites.create($tilemap, 1, 3, 1);
+xxm.tilemaps.createTile($tilemap, 0, 1, 1, 6);
+
+xxm.tilemaps.createTile($tilemap, 10, 4, 4, 3);
+xxm.tilemaps.createTile($tilemap, 10, 5, 4, 4);
+
+xxm.tilemaps.createTile($tilemap, 10, 4, 4, 5);
+xxm.tilemaps.createTile($tilemap, 10, 5, 4, 6);
+
+xxm.tilemaps.createTile($tilemap, 10, 4, 5, 4);
+xxm.tilemaps.createTile($tilemap, 10, 5, 5, 5);
+
+xxm.tilemaps.createTile($tilemap, 4, 3, 0, 4);
+xxm.tilemaps.createTile($tilemap, 0, 2, 6, 1);
+
+let $spr1 = xxm.sprites.create($tilemap, 1, 3, 5);
+let $spr2 = xxm.sprites.create($tilemap, 1, 2, 1);
+
+xxm.cssVar.set($spr1[0], 'ssy', 1);
 
 let $curSpr = $spr1;
 

@@ -19,6 +19,8 @@ exports.walkBlockages = [
     [LRD, LR, LR, LR, LR, X, O, O, X, X, X, X, X, X, O, O, O],
     [O, O, X, O, X, O, O, X, O, O, O, O, O, O, O, O, O],
     [X, X, X, X, O, X, X, X, X, X, X, X, X, X, O, O, O],
+    [O, O, O, O, O, O, O, O, O, O, X],
+    [O, O, O, O, O, O, O, O, O, O, X],
 ];
 
 }

@@ -7,7 +7,7 @@ body {
 
 .xxmLayers {
     width: calc(7 * var(--tw));
-    height: calc(7 * var(--th));
+    height: calc(8 * var(--th));
 
     background-color: antiquewhite;
 
