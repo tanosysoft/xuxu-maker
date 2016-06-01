@@ -70,7 +70,7 @@ $('body').keyup(ev => {
         return;
     }
 
-    $('.xxmLayers').toggleClass('zoom');
+    $('.xxmLayers').toggleClass('xxmZoom');
 });
 
 });
