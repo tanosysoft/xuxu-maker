@@ -3,17 +3,17 @@ body {
 
     align-items: center;
     justify-content: center;
+
+    background-image: url('../bg.png');
 }
 
 .xxmLayers {
-    width: calc(7 * var(--tw));
+    width: calc(9 * var(--tw));
     height: calc(8 * var(--th));
 
-    background-color: antiquewhite;
-
-    border-radius: 50px;
-
     overflow: hidden;
+
+    border-radius: 30px;
 }
 
 .margin-shake {
@@ -34,3 +34,4 @@ body {
         margin-left: 0;
         margin-right: -10px;
     }
+}
