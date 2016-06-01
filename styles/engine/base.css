@@ -10,3 +10,7 @@ body {
 
     overflow: hidden;
 }
+
+.zoom {
+    zoom: 2;
+}

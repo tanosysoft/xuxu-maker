@@ -65,4 +65,12 @@ $('body').keyup(ev => {
     $layer.toggleClass('animated margin-shake');
 });
 
+$('body').keyup(ev => {
+    if(ev.which !== 90) {
+        return;
+    }
+
+    $('.xxmLayers').toggleClass('zoom');
+});
+
 });
