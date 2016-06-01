@@ -11,7 +11,7 @@
 }
 
 .xxmSprite {
-    background-image: var(--sprite-url);
+    background-image: var(--spriteUrl);
     background-position-x: 0;
     background-position-y: calc(var(--ssy) * var(--ssfh));
 }
@@ -24,10 +24,10 @@
 
 .xxmSprite.xxmAnimate {
     animation: frames steps(4, end) infinite;
-    animation-duration: var(--anim-duration);
-    animation-delay: calc(-1 * var(--anim-duration) / var(--ssfc));
+    animation-duration: var(--animDuration);
+    animation-delay: calc(-1 * var(--animDuration) / var(--ssfc));
 }
 
 .xxmSprite.xxmWalking {
-    transition: var(--walk-duration) linear left, var(--walk-duration) linear top;
+    transition: var(--walkDuration) linear left, var(--walkDuration) linear top;
 }

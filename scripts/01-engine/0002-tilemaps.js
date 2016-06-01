@@ -14,7 +14,7 @@ exports.create = ($parent, tilesetId) => {
     let tileset = xxm.db.tilesets[tilesetId];
 
     xxm.cssVar.set(
-        $el[0], 'tileset-url',
+        $el[0], 'tilesetUrl',
         `url("${window.location}tilesets/${tileset.internalName}.png")`
     );
 

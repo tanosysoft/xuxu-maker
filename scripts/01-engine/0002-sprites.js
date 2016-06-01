@@ -6,11 +6,11 @@ exports.create = ($parent, spec, x, y) => {
     let $el = $('<div>').addClass('xxmSprite');
 
     xxm.cssVar.set(
-        $el[0], 'sprite-url', `url("${window.location}${spec.url}")`
+        $el[0], 'spriteUrl', `url("${window.location}${spec.url}")`
     );
 
-    xxm.cssVar.set($el[0], 'anim-duration', spec.animDuration || '0.7s');
-    xxm.cssVar.set($el[0], 'walk-duration', spec.walkDuration || '0.5s');
+    xxm.cssVar.set($el[0], 'animDuration', spec.animDuration || '0.7s');
+    xxm.cssVar.set($el[0], 'walkDuration', spec.walkDuration || '0.5s');
 
     xxm.cssVar.set($el[0], 'ssfc', spec.ssfc || 4);
     xxm.cssVar.set($el[0], 'ssfw', spec.ssfw || 32);

@@ -16,7 +16,7 @@
     width: var(--tw);
     height: var(--th);
 
-    background-image: var(--tileset-url);
+    background-image: var(--tilesetUrl);
     background-position-x: calc(-1 * var(--tsx) * var(--tw));
     background-position-y: calc(-1 * var(--tsy) * var(--th));
 }
