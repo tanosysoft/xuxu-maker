@@ -2,7 +2,7 @@
 
 let exports = xxm.db.tilesets[1] = {};
 
-exports.internalName = 'test';
+exports.name = 'test';
 
 exports.highTiles = [
     '10,0', '11,0', '12,0',
