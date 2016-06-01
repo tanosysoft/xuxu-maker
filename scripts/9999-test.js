@@ -60,7 +60,7 @@ $('body').keyup(ev => {
         return;
     }
 
-    $layer.toggleClass('animated shake');
+    $layer.toggleClass('animated margin-shake');
 });
 
 });

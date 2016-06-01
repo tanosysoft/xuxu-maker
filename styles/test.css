@@ -15,3 +15,22 @@ body {
 
     overflow: hidden;
 }
+
+.margin-shake {
+    animation-name: margin-shake;
+}
+
+@keyframes margin-shake {
+    from, to {
+        margin: 0;
+    }
+
+    10%, 30%, 50%, 70%, 90% {
+        margin-left: -10px;
+        margin-right: 0;
+    }
+
+    20%, 40%, 60%, 80% {
+        margin-left: 0;
+        margin-right: -10px;
+    }
