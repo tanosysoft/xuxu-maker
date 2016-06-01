@@ -28,6 +28,6 @@
     animation-delay: calc(-1 * var(--anim-duration) / var(--ssfc));
 }
 
-.xxmSprite.xxmWalk {
+.xxmSprite.xxmWalking {
     transition: var(--walk-duration) linear left, var(--walk-duration) linear top;
 }

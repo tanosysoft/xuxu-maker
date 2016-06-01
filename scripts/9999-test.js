@@ -22,7 +22,7 @@ let $spr1 = xxm.sprites.create($tilemap, {
     ssfh: '62px',
     ox: '39px',
     oy: '24px',
-}, 3, 3).addClass('xxmWalk');
+}, 3, 3);
 
 let $spr2 = xxm.sprites.create($tilemap, {
     url: 'DemonFighter.png',
@@ -31,7 +31,7 @@ let $spr2 = xxm.sprites.create($tilemap, {
     ssy: 1,
     ox: '39px',
     oy: '24px',
-}, 3, 1).addClass('xxmWalk');
+}, 3, 1);
 
 let $curSpr = $spr1;
 
