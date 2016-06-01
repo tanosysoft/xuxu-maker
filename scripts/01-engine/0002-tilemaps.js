@@ -40,11 +40,11 @@ exports.createTile = ($parent, tsx, tsy, x, y) => {
     let ts = xxm.db.tilesets[tsId];
 
     if(ts.highTiles.includes(`${tsx},${tsy}`)) {
-        $el.css('z-index', 'var(--y)');
+        $el.css('z-index', 'calc(var(--y) + 1)');
     }
     else
     if(ts.highTiles.includes(`${tsx},${tsy - 1}`)) {
-        $el.css('z-index', 'calc(var(--y) - 1)');
+        $el.css('z-index', 'var(--y)');
     }
 
     $parent.append($el);

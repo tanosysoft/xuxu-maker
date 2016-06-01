@@ -20,7 +20,7 @@ exports.select = $el => {
 
         if(lastDirection === 'D') {
             $currentEl.css(
-                'z-index', xxm.cssVar.get($currentEl[0], 'y', 'int') - 1
+                'z-index', xxm.cssVar.get($currentEl[0], 'y', 'int')
             );
         }
     });
@@ -104,7 +104,7 @@ function control() {
 
                 if(shouldMove) {
                     setCssVar('y', y - 1);
-                    $currentEl.css('z-index', y - 2);
+                    $currentEl.css('z-index', y - 1);
                 }
                 break;
 
