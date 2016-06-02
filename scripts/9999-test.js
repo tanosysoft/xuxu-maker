@@ -30,9 +30,10 @@ xxm.tilemaps.createTile($tilemap, 4, 3, 1, 4);
 xxm.tilemaps.createTile($tilemap, 15, 5, 7, 1);
 
 let $spr1 = xxm.sprites.create($tilemap, 2, 4, 5);
-let $spr2 = xxm.sprites.create($tilemap, 1, 3, 1);
+let $spr2 = xxm.sprites.create($tilemap, 1, 4, 4);
 
-xxm.cssVar.set($spr1[0], 'ssy', 1);
+xxm.cssVar.set($spr1[0], 'ssy', 2);
+xxm.cssVar.set($spr2[0], 'ssy', 2);
 
 let $curSpr = $spr1;
 
