@@ -98,6 +98,12 @@ exports.flipDirection = d => {
 };
 
 exports.testWalk = ($tiles, x, y, d) => {
+    let [nx, ny] = exports.walkCoordinates(x, y, d);
+
+    if(nx < 0 || ny < 0) {
+        return false;
+    }
+
     let $xyTiles = exports.filterTilesByPos($tiles, x, y);
 
     let xydBlocked = $xyTiles.toArray().some(t => {
@@ -108,8 +114,6 @@ exports.testWalk = ($tiles, x, y, d) => {
     if(xydBlocked) {
         return false;
     }
-
-    let [nx, ny] = exports.walkCoordinates(x, y, d);
 
     let $nxnyTiles = exports.filterTilesByPos($tiles, nx, ny);
 
