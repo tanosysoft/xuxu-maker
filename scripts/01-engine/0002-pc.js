@@ -11,16 +11,18 @@ let lastDirection = 'none';
 exports.select = $el => {
     $currentEl = $el;
 
-    $currentEl.on('transitionend', () => {
-        $currentEl.removeClass('xxmWalking');
+    $currentEl.on('transitionend', function() {
+        let $this = $(this);
+
+        $this.removeClass('xxmWalking');
 
         if(direction === 'none') {
-            $currentEl.removeClass('xxmAnimate');
+            $this.removeClass('xxmAnimate');
         }
 
         if(lastDirection === 'D') {
-            $currentEl.css(
-                'z-index', xxm.cssVar.get($currentEl[0], 'y', 'int')
+            $this.css(
+                'z-index', xxm.cssVar.get(this, 'y', 'int')
             );
         }
     });
@@ -49,7 +51,7 @@ $(() => {
             return;
         }
 
-        lastDirection = direction = keyDirection = newDirection;
+        direction = keyDirection = newDirection;
 
         if(direction !== 'none') {
             $currentEl.addClass('xxmAnimate');
@@ -73,6 +75,8 @@ function control() {
     if(!$currentEl || direction === 'none' || $currentEl.is('.xxmWalking')) {
         return;
     }
+
+    lastDirection = direction;
 
     let x = getCssVar('x', 'int');
     let y = getCssVar('y', 'int');

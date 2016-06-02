@@ -52,3 +52,28 @@ exports.set = function() {
         );
     }
 };
+
+exports.setIfUnset = function() {
+    let args = xxm.overloaded(arguments, {
+        2: ['el', 'hash'],
+        3: ['el', 'name', 'val'],
+    });
+
+    let el = args.el;
+
+    if(args.hash) {
+        Object.keys(args.hash).forEach(
+            k => exports.setIfUnset(el, k, args.hash[k])
+        );
+
+        return;
+    }
+
+    let name = args.name;
+
+    if(exports.get(el, name) !== '') {
+        return;
+    }
+
+    exports.set(el, name, args.val);
+};
