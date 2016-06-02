@@ -40,7 +40,7 @@ exports.set = function() {
         originalStyle += ';';
     }
 
-    let re = new RegExp(`((^| *;| )--${name} *): *([^(;|$)]+)`, 'g');
+    let re = new RegExp(`((^| *;| )--${name} *): *([^;$]+)`, 'g');
     let reRes = re.exec(originalStyle);
 
     if(!reRes) {
