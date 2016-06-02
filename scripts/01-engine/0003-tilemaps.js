@@ -8,15 +8,64 @@ $(() => {
     );
 });
 
+xxm.domWatcher.watch({
+    added: true,
+    attr: 'tileset-id',
+    is: '.xxmTilemap',
+
+    fn: (el, ev) => {
+        let $el = $(el);
+
+        let tsId = parseInt($el.attr('tileset-id'));
+        let ts = xxm.db.tilesets[tsId];
+
+        xxm.cssVar.set(el, {
+            tilesetUrl: `url("${window.location}tilesets/${ts.name}.png")`,
+        });
+    }
+});
+
+xxm.domWatcher.watch({
+    added: true,
+    attr: 'style',
+    is: '.xxmTile',
+
+    fn: (el, ev) => {
+        let tsx = xxm.cssVar.get(el, 'tsx', 'int');
+        let tsy = xxm.cssVar.get(el, 'tsy', 'int');
+
+        if(
+            el.oldTsx === tsx
+            && el.oldTsy === tsy
+        ) {
+            return;
+        }
+
+        el.oldTsx = tsx;
+        el.oldTsy = tsy;
+
+        let $el = $(el);
+
+        let tsId = parseInt($el.closest('.xxmTilemap').attr('tileset-id'));
+        let ts = xxm.db.tilesets[tsId];
+
+        if(ts.highTiles.includes(`${tsx},${tsy}`)) {
+            $el.css('z-index', 'calc(var(--y) + 1)');
+        }
+        else
+        if(ts.highTiles.includes(`${tsx},${tsy - 1}`)) {
+            $el.css('z-index', 'var(--y)');
+        }
+        else {
+            $el.css('z-index', '');
+        }
+    }
+});
+
 exports.create = ($parent, tilesetId) => {
-    let $el = $('<div>').addClass('xxmTilemap');
-
-    let tileset = xxm.db.tilesets[tilesetId];
-
-    xxm.cssVar.set($el[0], {
-        tilesetId,
-        tilesetUrl: `url("${window.location}tilesets/${tileset.name}.png")`,
-    });
+    let $el = $('<div>')
+        .addClass('xxmTilemap')
+        .attr('tileset-id', tilesetId);
 
     $parent.append($el);
 
@@ -26,24 +75,7 @@ exports.create = ($parent, tilesetId) => {
 exports.createTile = ($parent, tsx, tsy, x, y) => {
     let $el = $('<div>').addClass('xxmTile');
 
-    let attrs = { tsx, tsy, x, y };
-
-    for(let n in attrs) {
-        xxm.cssVar.set($el[0], n, attrs[n]);
-    }
-
-    let $tm = $parent.closest('.xxmTilemap').addBack('.xxmTilemap');
-
-    let tsId = xxm.cssVar.get($tm[0], 'tilesetId', 'int');
-    let ts = xxm.db.tilesets[tsId];
-
-    if(ts.highTiles.includes(`${tsx},${tsy}`)) {
-        $el.css('z-index', 'calc(var(--y) + 1)');
-    }
-    else
-    if(ts.highTiles.includes(`${tsx},${tsy - 1}`)) {
-        $el.css('z-index', 'var(--y)');
-    }
+    xxm.cssVar.set($el[0], { tsx, tsy, x, y });
 
     $parent.append($el);
 
@@ -58,9 +90,7 @@ exports.filterTilesByPos = ($tiles, x, y) => {
 };
 
 exports.tileWalkBlockages = $tile => {
-    let tsId = xxm.cssVar.get(
-        $tile.closest('.xxmTilemap')[0], 'tilesetId', 'int'
-    );
+    let tsId = parseInt($tile.closest('.xxmTilemap').attr('tileset-id'));
 
     let ts = xxm.db.tilesets[tsId];
 
