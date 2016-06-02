@@ -74,4 +74,19 @@ $('body').keyup(ev => {
     $('.xxmLayers').toggleClass('xxmZoom');
 });
 
+$('body').keyup(ev => {
+    if(ev.which !== 77) {
+        return;
+    }
+
+    if($curSpr.is('.xxmWalking')) {
+        return;
+    }
+
+    $curSpr.attr('spriteset-id', {
+        1: 2,
+        2: 1,
+    }[$curSpr.attr('spriteset-id')]);
+});
+
 });
