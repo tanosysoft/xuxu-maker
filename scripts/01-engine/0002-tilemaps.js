@@ -13,12 +13,10 @@ exports.create = ($parent, tilesetId) => {
 
     let tileset = xxm.db.tilesets[tilesetId];
 
-    xxm.cssVar.set(
-        $el[0], 'tilesetUrl',
-        `url("${window.location}tilesets/${tileset.name}.png")`
-    );
-
-    $el.attr('tileset-id', tilesetId);
+    xxm.cssVar.set($el[0], {
+        tilesetId,
+        tilesetUrl: `url("${window.location}tilesets/${tileset.name}.png")`,
+    });
 
     $parent.append($el);
 
@@ -36,7 +34,7 @@ exports.createTile = ($parent, tsx, tsy, x, y) => {
 
     let $tm = $parent.closest('.xxmTilemap').addBack('.xxmTilemap');
 
-    let tsId = parseInt($tm.attr('tileset-id'));
+    let tsId = xxm.cssVar.get($tm[0], 'tilesetId', 'int');
     let ts = xxm.db.tilesets[tsId];
 
     if(ts.highTiles.includes(`${tsx},${tsy}`)) {
@@ -60,7 +58,10 @@ exports.filterTilesByPos = ($tiles, x, y) => {
 };
 
 exports.tileWalkBlockages = $tile => {
-    let tsId = parseInt($tile.closest('.xxmTilemap').attr('tileset-id'));
+    let tsId = xxm.cssVar.get(
+        $tile.closest('.xxmTilemap')[0], 'tilesetId', 'int'
+    );
+
     let ts = xxm.db.tilesets[tsId];
 
     let tsx = parseInt($tile[0].style.getPropertyValue('--tsx'));
