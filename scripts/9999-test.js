@@ -79,10 +79,6 @@ $('body').keyup(ev => {
         return;
     }
 
-    if($curSpr.is('.xxmWalking')) {
-        return;
-    }
-
     $curSpr.attr('spriteset-id', {
         1: 2,
         2: 1,

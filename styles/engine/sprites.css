@@ -1,17 +1,24 @@
 .xxmSprite {
     position: absolute;
 
-    left: calc(var(--x) * var(--tw) - var(--ox));
-    top: calc(var(--y) * var(--th) - var(--oy));
+    left: calc(var(--x) * var(--tw));
+    top: calc(var(--y) * var(--th));
+
+    width: var(--tw);
+    height: var(--th);
+}
+
+.xxmSpriteInternal {
+    position: absolute;
+
+    left: calc(-1 * var(--ox));
+    top: calc(-1 * var(--oy));
 
     width: var(--ssfw);
     height: var(--ssfh);
 
-    overflow: hidden;
-}
-
-.xxmSprite {
     background-image: var(--spritesetUrl);
+
     background-position-x: 0;
     background-position-y: calc(var(--ssy) * var(--ssfh));
 }
@@ -22,7 +29,7 @@
     }
 }
 
-.xxmSprite.xxmAnimate {
+.xxmSprite.xxmAnimate .xxmSpriteInternal {
     animation: frames steps(4, end) infinite;
     animation-duration: var(--animDuration);
     animation-delay: calc(-1 * var(--animDuration) / var(--ssfc));

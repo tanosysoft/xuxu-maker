@@ -46,6 +46,8 @@ exports.create = ($parent, ssId, x, y) => {
 
     $el.css('z-index', y);
 
+    $el.append($('<div>').addClass('xxmSpriteInternal'));
+
     $parent.append($el);
 
     return $el;
