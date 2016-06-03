@@ -85,4 +85,33 @@ $('body').keyup(ev => {
     }[$curSpr.attr('spriteset-id')]);
 });
 
+$([$spr1[0], $spr2[0]])
+    .addClass('animated')
+    .css('animation-iteration-count', 'infinite');
+
+$('body').keyup(ev => {
+    if(ev.which !== 65) {
+        return;
+    }
+
+    if($curSpr[0].anim === undefined) {
+        $curSpr[0].anim = 0;
+    }
+
+    let anims = [
+        'none', 'flash', 'pulse', 'wobble',
+        'jello', 'shake', 'flip', 'rotateIn',
+    ];
+
+    let oldAnim = anims[$curSpr[0].anim];
+
+    $curSpr[0].anim = ($curSpr[0].anim + 1) % anims.length;
+
+    let newAnim = anims[$curSpr[0].anim];
+
+    $curSpr
+        .removeClass(oldAnim)
+        .addClass(newAnim);
+});
+
 });
