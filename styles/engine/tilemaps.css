@@ -3,8 +3,9 @@
 
     left: 0;
     top: 0;
-    right: 0;
-    bottom: 0;
+
+    width: calc(var(--w) * var(--tw));
+    height: calc(var(--h) * var(--th));
 }
 
 .xxmTile {

@@ -15,5 +15,3 @@ console.log(h('script', {
 [...scriptTags, ...stylesheetLinkTags].forEach(
     el => console.log(el.outerHTML)
 );
-
-console.log(h('.xxmLayers').outerHTML);

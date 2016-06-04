@@ -1,10 +1,16 @@
 'use strict'; $(() => {
 
-let $layer = xxm.layers.create(0)
+let $vp = xxm.viewports.create(640, 480)
+    .appendTo($('body'));
+
+let $layer = xxm.layers.create($vp, 0)
     .css('animation-iteration-count', 'infinite');
 
 let $tilemap = xxm.tilemaps.create($layer, 1)
     .css('background-image', 'url("test.png")');
+
+xxm.cssVar.set($tilemap[0], 'w', 30);
+xxm.cssVar.set($tilemap[0], 'h', 20);
 
 for(let i = 0; i < 2; ++i) {
     let j = i * 3;
@@ -29,13 +35,13 @@ xxm.tilemaps.createTile($tilemap, 10, 5, 6, 5);
 xxm.tilemaps.createTile($tilemap, 4, 3, 1, 4);
 xxm.tilemaps.createTile($tilemap, 15, 5, 7, 1);
 
-let $spr1 = xxm.sprites.create($tilemap, 2, 4, 5);
+let $spr1 = xxm.sprites.create($tilemap, 2, 15, 5);
 let $spr2 = xxm.sprites.create($tilemap, 1, 4, 4);
 
-xxm.cssVar.set($spr1[0], 'ssy', 2);
+xxm.cssVar.set($spr1[0], 'ssy', 3);
 xxm.cssVar.set($spr2[0], 'ssy', 2);
 
-let $curSpr = $spr1;
+let $curSpr = $spr1.addClass('xxmViewportTarget');
 
 xxm.pc.select($curSpr);
 
@@ -48,12 +54,16 @@ $('body').keyup(ev => {
         return;
     }
 
+    $curSpr.removeClass('xxmViewportTarget');
+
     if($curSpr === $spr1) {
         $curSpr = $spr2;
     }
     else {
         $curSpr = $spr1;
     }
+
+    $curSpr.addClass('xxmViewportTarget');
 
     xxm.pc.select($curSpr);
 });

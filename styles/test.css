@@ -7,12 +7,7 @@ body {
     background-image: url('../bg.png');
 }
 
-.xxmLayers {
-    width: calc(9 * var(--tw));
-    height: calc(8 * var(--th));
-
-    overflow: hidden;
-
+.xxmViewport {
     border-radius: 30px;
 }
 
