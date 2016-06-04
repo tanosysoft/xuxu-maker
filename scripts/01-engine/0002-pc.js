@@ -61,6 +61,48 @@ $(() => {
 
 let raf = requestAnimationFrame;
 
+function readGamepad() {
+    raf(readGamepad);
+
+    let pad = navigator.getGamepads()[0];
+
+    if(!pad) {
+        return;
+    }
+
+    let newDirection = 'none';
+
+    let deadzone = 0.2;
+
+    if(pad.axes[0] < -deadzone) {
+        newDirection = 'L';
+    }
+    else
+    if(pad.axes[0] > deadzone) {
+        newDirection = 'R';
+    }
+
+    if(pad.axes[1] < -deadzone) {
+        newDirection = 'U';
+    }
+    else
+    if(pad.axes[1] > deadzone) {
+        newDirection = 'D';
+    }
+
+    if(newDirection === keyDirection) {
+        return;
+    }
+
+    direction = keyDirection = newDirection;
+
+    if(direction !== 'none') {
+        $currentEl.addClass('xxmAnimate');
+    }
+}
+
+readGamepad();
+
 function getCssVar(n, type) {
     return xxm.cssVar.get($currentEl[0], n, type);
 }
