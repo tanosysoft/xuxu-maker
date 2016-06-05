@@ -4,19 +4,29 @@ let exports = xxm.viewports = {};
 
 exports.create = (w, h) => {
     let $vp = $('<div>')
-        .addClass('xxmViewport')
-        .width(w)
-        .height(h);
+        .addClass('xxmViewport');
+
+    if(w !== undefined && w !== null) {
+        $vp.width(w);
+    }
+
+    if(h !== undefined && h !== null) {
+        $vp.height(h);
+    }
+
+    xxm.cssVar.set($vp[0], 'padding', 128);
 
     return $vp;
 };
 
 let raf = requestAnimationFrame;
 
+let vpLastPadding;
+let tLastX;
+let tLastY;
+
 function updateScrolls() {
     raf(updateScrolls);
-
-    let vpMargin = 64;
 
     $('.xxmViewport').each((i, vp) => {
         let $vp = $(vp);
@@ -27,40 +37,84 @@ function updateScrolls() {
             return;
         }
 
-        let tLeft = parseInt($target.css('left'));
-        let tTop = parseInt($target.css('top'));
+        let tx = parseInt($target.css('left'));
+        let ty = parseInt($target.css('top'));
+        let tw = $target.width();
+        let th = $target.height();
 
-        let vpEffectiveMargin = vpMargin;
+        let vpPadding = xxm.cssVar.get($vp[0], 'padding', 'int');
 
-        if($target.closest('.xxmZoom').length !== 0) {
-            tLeft *= 2;
-            tTop *= 2;
-            vpEffectiveMargin *= 2;
+        {
+            let $zoom = $target.closest('.xxmZoom');
+
+            if($zoom.length !== 0) {
+                let factor = parseInt($zoom.css('zoom'));
+
+                tx *= factor;
+                ty *= factor;
+                tw *= factor;
+                th *= factor;
+
+                vpPadding *= factor;
+            }
         }
+
+        if(vpPadding === vpLastPadding && tx === tLastX && ty === tLastY) {
+            return;
+        }
+
+        vpLastPadding = vpPadding;
+        tLastX = tx;
+        tLastY = ty;
 
         let vpWidth = $vp.width();
         let vpHeight = $vp.height();
 
-        let vpScrollH = $vp.scrollLeft();
-        let vpScrollV = $vp.scrollTop();
+        let shouldScroll = {
+            left: () => tx < $vp.scrollLeft() + vpPadding,
+            right: () => tx > $vp.scrollLeft() + vpWidth  - tw - vpPadding,
+            up: () => ty < $vp.scrollTop() + vpPadding,
+            down: () => ty > $vp.scrollTop() + vpHeight - th - vpPadding,
+        };
 
-        let tw = xxm.cssVar.get(document.body, 'tw', 'int');
-        let th = xxm.cssVar.get(document.body, 'th', 'int');
+        let scrollCenterX = () => $vp.scrollLeft(
+            tx - (vpWidth / 2) + (tw / 2)
+        );
 
-        if(tLeft < vpScrollH + vpEffectiveMargin) {
-            $vp.scrollLeft(tLeft - vpEffectiveMargin);
+        let scrollCenterY = () => $vp.scrollTop(
+            ty - (vpHeight / 2) + (th / 2)
+        );
+
+        if(shouldScroll.left()) {
+            $vp.scrollLeft(tx - vpPadding);
+
+            if(shouldScroll.right()) {
+                scrollCenterX();
+            }
+        }
+        else
+        if(shouldScroll.right()) {
+            $vp.scrollLeft(tx - vpWidth + tw + vpPadding);
+
+            if(shouldScroll.left()) {
+                scrollCenterX();
+            }
         }
 
-        if(tLeft > vpScrollH + vpWidth - vpEffectiveMargin - tw) {
-            $vp.scrollLeft(tLeft - vpWidth + vpEffectiveMargin + tw);
-        }
+        if(shouldScroll.up()) {
+            $vp.scrollTop(ty - vpPadding);
 
-        if(tTop < vpScrollV + vpEffectiveMargin) {
-            $vp.scrollTop(tTop - vpEffectiveMargin);
+            if(shouldScroll.down()) {
+                scrollCenterY();
+            }
         }
+        else
+        if(shouldScroll.down()) {
+            $vp.scrollTop(ty - vpHeight + vpPadding + th);
 
-        if(tTop > vpScrollV + vpHeight - vpEffectiveMargin - th) {
-            $vp.scrollTop(tTop - vpHeight + vpEffectiveMargin + th);
+            if(shouldScroll.up()) {
+                scrollCenterY();
+            }
         }
     });
 }
