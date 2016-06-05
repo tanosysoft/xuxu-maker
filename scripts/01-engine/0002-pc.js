@@ -31,77 +31,24 @@ exports.select = $el => {
 let $body;
 
 $(() => {
-    $body = $('body');
-
-    let keyDirections = {
-        37: 'L', 38: 'U',
-        39: 'R', 40: 'D',
-    };
-
-    $body.keyup(ev => {
-        if(keyDirection === keyDirections[ev.which]) {
+    xxm.pads.on('btnUp', btn => {
+        if(keyDirection === btn) {
             direction = keyDirection = 'none';
         }
     });
 
-    $body.keydown(ev => {
-        let newDirection = keyDirections[ev.which];
-
-        if(!newDirection || newDirection === keyDirection) {
+    xxm.pads.on('btnDown', btn => {
+        if(!'LURD'.includes(btn) || btn === keyDirection) {
             return;
         }
 
-        direction = keyDirection = newDirection;
+        direction = keyDirection = btn;
 
         if(direction !== 'none') {
             $currentEl.addClass('xxmAnimate');
         }
     });
 });
-
-let raf = requestAnimationFrame;
-
-function readGamepad() {
-    raf(readGamepad);
-
-    let pad = navigator.getGamepads()[0];
-
-    if(!pad) {
-        return;
-    }
-
-    let newDirection = 'none';
-
-    let deadzone = 0.2;
-
-    if(pad.axes[0] < -deadzone) {
-        newDirection = 'L';
-    }
-    else
-    if(pad.axes[0] > deadzone) {
-        newDirection = 'R';
-    }
-
-    if(pad.axes[1] < -deadzone) {
-        newDirection = 'U';
-    }
-    else
-    if(pad.axes[1] > deadzone) {
-        newDirection = 'D';
-    }
-
-    if(newDirection === keyDirection) {
-        return;
-    }
-
-    direction = keyDirection = newDirection;
-
-    if(direction !== 'none') {
-        $currentEl.addClass('xxmAnimate');
-    }
-}
-
-readGamepad();
 
 function getCssVar(n, type) {
     return xxm.cssVar.get($currentEl[0], n, type);
@@ -110,6 +57,8 @@ function getCssVar(n, type) {
 function setCssVar(n, val) {
     xxm.cssVar.set($currentEl[0], n, val);
 }
+
+let raf = requestAnimationFrame;
 
 function control() {
     raf(control);

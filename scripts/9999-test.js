@@ -45,83 +45,67 @@ let $curSpr = $spr1.addClass('xxmViewportTarget');
 
 xxm.pc.select($curSpr);
 
-$('body').keyup(ev => {
-    if(ev.which !== 83) {
-        return;
-    }
-
-    if($curSpr.is('.xxmWalking')) {
-        return;
-    }
-
-    $curSpr.removeClass('xxmViewportTarget');
-
-    if($curSpr === $spr1) {
-        $curSpr = $spr2;
-    }
-    else {
-        $curSpr = $spr1;
-    }
-
-    $curSpr.addClass('xxmViewportTarget');
-
-    xxm.pc.select($curSpr);
-});
-
-$('body').keyup(ev => {
-    if(ev.which !== 69) {
-        return;
-    }
-
-    $layer.toggleClass('animated margin-shake');
-});
-
-$('body').keyup(ev => {
-    if(ev.which !== 90) {
-        return;
-    }
-
-    $('.xxmLayers').toggleClass('xxmZoom');
-});
-
-$('body').keyup(ev => {
-    if(ev.which !== 77) {
-        return;
-    }
-
-    $curSpr.attr('spriteset-id', {
-        1: 2,
-        2: 1,
-    }[$curSpr.attr('spriteset-id')]);
-});
-
 $([$spr1[0], $spr2[0]])
     .addClass('animated')
     .css('animation-iteration-count', 'infinite');
 
-$('body').keyup(ev => {
-    if(ev.which !== 65) {
-        return;
+xxm.pads.on('btnDown', btn => {
+    switch(btn) {
+        case 'Z':
+            if($curSpr.is('.xxmWalking')) {
+                return;
+            }
+
+            $curSpr.removeClass('xxmViewportTarget');
+
+            if($curSpr === $spr1) {
+                $curSpr = $spr2;
+            }
+            else {
+                $curSpr = $spr1;
+            }
+
+            $curSpr.addClass('xxmViewportTarget');
+
+            xxm.pc.select($curSpr);
+            break;
+
+        case 'X':
+            $curSpr.attr('spriteset-id', {
+                1: 2,
+                2: 1,
+            }[$curSpr.attr('spriteset-id')]);
+            break;
+
+        case 'A':
+            if($curSpr[0].anim === undefined) {
+                $curSpr[0].anim = 0;
+            }
+
+            let anims = [
+                'none', 'flash', 'pulse', 'wobble',
+                'jello', 'shake', 'flip', 'rotateIn',
+            ];
+
+            let oldAnim = anims[$curSpr[0].anim];
+
+            $curSpr[0].anim = ($curSpr[0].anim + 1) % anims.length;
+
+            let newAnim = anims[$curSpr[0].anim];
+
+            $curSpr
+                .removeClass(oldAnim)
+                .addClass(newAnim);
+            break;
+
+        case 'ST':
+            $layer.toggleClass('animated margin-shake');
+            break;
+
+        case 'SL':
+            $('.xxmLayers').toggleClass('xxmZoom');
+            break;
     }
-
-    if($curSpr[0].anim === undefined) {
-        $curSpr[0].anim = 0;
-    }
-
-    let anims = [
-        'none', 'flash', 'pulse', 'wobble',
-        'jello', 'shake', 'flip', 'rotateIn',
-    ];
-
-    let oldAnim = anims[$curSpr[0].anim];
-
-    $curSpr[0].anim = ($curSpr[0].anim + 1) % anims.length;
-
-    let newAnim = anims[$curSpr[0].anim];
-
-    $curSpr
-        .removeClass(oldAnim)
-        .addClass(newAnim);
 });
 
 });
