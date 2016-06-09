@@ -35,77 +35,30 @@ xxm.tilemaps.createTile($tilemap, 10, 5, 6, 5);
 xxm.tilemaps.createTile($tilemap, 4, 3, 1, 4);
 xxm.tilemaps.createTile($tilemap, 15, 5, 7, 1);
 
-let $spr1 = xxm.sprites.create($tilemap, 2, 15, 5);
-let $spr2 = xxm.sprites.create($tilemap, 1, 4, 4);
+xxm.events.create({
+    id: 1,
+    name: 'chara1',
 
-xxm.cssVar.set($spr1[0], 'ssy', 3);
-xxm.cssVar.set($spr2[0], 'ssy', 2);
+    $initialParent: $tilemap,
+    initialPos: [1, 1],
 
-let $curSpr = $spr1.addClass('xxmViewportTarget');
+    pages: [
+        {
+            checkConditions: () => {
+                return window.derp === 1;
+            },
 
-xxm.pc.select($curSpr);
+            spritesetId: 1,
+        },
 
-$([$spr1[0], $spr2[0]])
-    .addClass('animated')
-    .css('animation-iteration-count', 'infinite');
+        {
+            checkConditions: () => {
+                return window.derp === 2;
+            },
 
-xxm.pads.on('btnDown', btn => {
-    switch(btn) {
-        case 'Z':
-            if($curSpr.is('.xxmWalking')) {
-                return;
-            }
-
-            $curSpr.removeClass('xxmViewportTarget');
-
-            if($curSpr === $spr1) {
-                $curSpr = $spr2;
-            }
-            else {
-                $curSpr = $spr1;
-            }
-
-            $curSpr.addClass('xxmViewportTarget');
-
-            xxm.pc.select($curSpr);
-            break;
-
-        case 'X':
-            $curSpr.attr('spriteset-id', {
-                1: 2,
-                2: 1,
-            }[$curSpr.attr('spriteset-id')]);
-            break;
-
-        case 'A':
-            if($curSpr[0].anim === undefined) {
-                $curSpr[0].anim = 0;
-            }
-
-            let anims = [
-                'none', 'flash', 'pulse', 'wobble',
-                'jello', 'shake', 'flip', 'rotateIn',
-            ];
-
-            let oldAnim = anims[$curSpr[0].anim];
-
-            $curSpr[0].anim = ($curSpr[0].anim + 1) % anims.length;
-
-            let newAnim = anims[$curSpr[0].anim];
-
-            $curSpr
-                .removeClass(oldAnim)
-                .addClass(newAnim);
-            break;
-
-        case 'ST':
-            $layer.toggleClass('animated margin-shake');
-            break;
-
-        case 'SL':
-            $('.xxmLayers').toggleClass('xxmZoom');
-            break;
-    }
+            spritesetId: 2,
+        },
+    ],
 });
 
 });
