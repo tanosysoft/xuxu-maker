@@ -60,4 +60,10 @@ exports.filterByPos = ($sprs, x, y) => {
     );
 };
 
+exports.testWalk = ($sprs, x, y, d) => {
+    let [nx, ny] = xxm.tilemaps.walkCoordinates(x, y, d);
+
+    return (exports.filterByPos($sprs, nx, ny).length === 0);
+};
+
 }

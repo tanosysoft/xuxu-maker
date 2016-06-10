@@ -105,9 +105,15 @@ function control() {
     let x = getCssVar('x', 'int');
     let y = getCssVar('y', 'int');
 
-    let $tiles = $currentEl.closest('.xxmTilemap').children('.xxmTile');
+    let $tm = $currentEl.closest('.xxmTilemap');
 
-    let shouldMove = xxm.tilemaps.testWalk($tiles, x, y, direction);
+    let $tiles = $tm.children('.xxmTile');
+    let $sprs = $tm.children('.xxmSprite');
+
+    let shouldMove = (
+        xxm.tilemaps.testWalk($tiles, x, y, direction)
+        && xxm.sprites.testWalk($sprs, x, y, direction)
+    );
 
     if(shouldMove && !$currentEl.is(':last-child')) {
         $currentEl.parent().append($currentEl);
