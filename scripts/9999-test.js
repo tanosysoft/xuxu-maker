@@ -40,25 +40,19 @@ xxm.events.create({
     name: 'chara1',
 
     $initialParent: $tilemap,
-    initialPos: [1, 1],
+    initialPos: [4, 3],
 
     pages: [
         {
-            checkConditions: () => {
-                return window.derp === 1;
-            },
-
             spritesetId: 1,
-        },
-
-        {
-            checkConditions: () => {
-                return window.derp === 2;
-            },
-
-            spritesetId: 2,
+            trigger: 'action',
+            exec: ev => xxm.cssAnimations.add(ev.$spr, 'flip'),
         },
     ],
 });
+
+let $hero = xxm.sprites.create($tilemap, 2, 1, 5);
+
+xxm.pc.select($hero);
 
 });

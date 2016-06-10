@@ -48,7 +48,7 @@ let updateEvent = ev => {
     }
 
     if(ev.$spr) {
-        xxm.pc.select(ev.$spr);
+        ev.$spr.data('xxmParentEvent', ev);
     }
 };
 

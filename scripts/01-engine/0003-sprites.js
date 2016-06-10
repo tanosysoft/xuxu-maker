@@ -53,4 +53,11 @@ exports.create = ($parent, ssId, x, y) => {
     return $el;
 };
 
+exports.filterByPos = ($sprs, x, y) => {
+    return $sprs.filter((i, spr) =>
+        x === xxm.cssVar.get(spr, 'x', 'int')
+        && y === xxm.cssVar.get(spr, 'y', 'int')
+    );
+};
+
 }

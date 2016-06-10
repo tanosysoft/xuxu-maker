@@ -48,6 +48,39 @@ $(() => {
             $currentEl.addClass('xxmAnimate');
         }
     });
+
+    xxm.pads.on('btnDown', btn => {
+        if(btn !== 'Z' || !$currentEl || $currentEl.is('.xxmWalking')) {
+            return;
+        }
+
+        let [tx, ty] = xxm.tilemaps.walkCoordinates(
+            xxm.cssVar.get($currentEl[0], 'x', 'int'),
+            xxm.cssVar.get($currentEl[0], 'y', 'int'), {
+                1: 'U', 0: 'D',
+                3: 'L', 2: 'R',
+            }[xxm.cssVar.get($currentEl[0], 'ssy', 'int')]
+        );
+
+        let $tSpr = $(xxm.sprites.filterByPos(
+            $currentEl.siblings(), tx, ty
+        ).toArray().find(spr => {
+            let ev = $(spr).data('xxmParentEvent');
+            return ev && ev.currentPage && ev.currentPage.trigger === 'action';
+        }));
+
+        if($tSpr.length === 0) {
+            return;
+        }
+
+        let ev = $tSpr.data('xxmParentEvent');
+
+        if(!ev.currentPage.exec) {
+            return;
+        }
+
+        ev.currentPage.exec(ev);
+    });
 });
 
 function getCssVar(n, type) {
