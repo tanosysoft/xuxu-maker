@@ -8,11 +8,50 @@
     background-color: rgba(0, 0, 0, 0.7);
 
     color: white;
+
+    --margin: 16px;
+}
+
+.xxmTopWindow {
+    position: absolute;
+
+    left: var(--margin);
+    right: var(--margin);
+    top: var(--margin);
+}
+
+.xxmTopLeftWindow {
+    position: absolute;
+
+    left: var(--margin);
+    top: var(--margin);
 }
 
 .xxmTopRightWindow {
     position: absolute;
 
-    right: 16px;
-    top: 16px;
+    right: var(--margin);
+    top: var(--margin);
+}
+
+.xxmBottomWindow {
+    position: absolute;
+
+    left: var(--margin);
+    right: var(--margin);
+    bottom: var(--margin);
+}
+
+.xxmBottomLeftWindow {
+    position: absolute;
+
+    left: var(--margin);
+    bottom: var(--margin);
+}
+
+.xxmBottomRightWindow {
+    position: absolute;
+
+    right: var(--margin);
+    bottom: var(--margin);
 }

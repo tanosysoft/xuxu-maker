@@ -61,7 +61,7 @@ xxm.pc.select($hero);
 let $uiLayer = xxm.layers.create($xxm, 0);
 
 let $wnd = $('<div>')
-    .addClass('xxmWindow xxmTopRightWindow');
+    .addClass('xxmWindow xxmBottomRightWindow');
 
 $wnd.text('これはテストメセージです');
 
