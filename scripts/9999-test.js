@@ -58,4 +58,13 @@ let $hero = xxm.sprites.create($tilemap, 2, 1, 5)
 
 xxm.pc.select($hero);
 
+let $uiLayer = xxm.layers.create($xxm, 0);
+
+let $wnd = $('<div>')
+    .addClass('xxmWindow xxmTopRightWindow');
+
+$wnd.text('これはテストメセージです');
+
+$uiLayer.append($wnd);
+
 });

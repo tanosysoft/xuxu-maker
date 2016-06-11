@@ -1,0 +1,18 @@
+.xxmWindow {
+    display: inline-block;
+
+    border-image: url(../../system/windowBorders.png) 7;
+
+    padding: 6px 8px;
+
+    background-color: rgba(0, 0, 0, 0.7);
+
+    color: white;
+}
+
+.xxmTopRightWindow {
+    position: absolute;
+
+    right: 16px;
+    top: 16px;
+}

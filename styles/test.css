@@ -7,8 +7,9 @@ body {
     background-image: url('../bg.png');
 }
 
-.xxmViewport {
+.xxm {
     border-radius: 30px;
+    overflow: hidden;
 }
 
 .margin-shake {
