@@ -8,8 +8,9 @@ body {
 }
 
 .xxm {
-    border-radius: 30px;
-    overflow: hidden;
+    box-sizing: content-box;
+
+    border: 10px solid rgba(0, 0, 0, 0.2);
 }
 
 .margin-shake {
