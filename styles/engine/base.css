@@ -11,6 +11,10 @@ body {
     overflow: hidden;
 }
 
+.xxm {
+    position: relative;
+}
+
 .xxmZoom {
     zoom: 2;
 }

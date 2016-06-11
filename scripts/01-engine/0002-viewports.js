@@ -2,31 +2,22 @@
 
 let exports = xxm.viewports = {};
 
-exports.create = (w, h) => {
-    let $vp = $('<div>')
-        .addClass('xxmViewport');
+exports.set = $el => {
+    $el = $($el);
 
-    if(w !== undefined && w !== null) {
-        $vp.width(w);
-    }
+    $el.addClass('xxmViewport');
 
-    if(h !== undefined && h !== null) {
-        $vp.height(h);
-    }
+    xxm.cssVar.setIfUnset($el[0], 'padding', 128);
 
-    xxm.cssVar.set($vp[0], 'padding', 128);
-
-    return $vp;
+    return $el;
 };
-
-let raf = requestAnimationFrame;
 
 let vpLastPadding;
 let tLastX;
 let tLastY;
 
-function updateScrolls() {
-    raf(updateScrolls);
+(function thisFn() {
+    requestAnimationFrame(thisFn);
 
     $('.xxmViewport').each((i, vp) => {
         let $vp = $(vp);
@@ -117,8 +108,6 @@ function updateScrolls() {
             }
         }
     });
-}
-
-updateScrolls();
+})();
 
 }

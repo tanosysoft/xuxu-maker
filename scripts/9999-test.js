@@ -1,16 +1,18 @@
 'use strict'; $(() => {
 
-let $vp = xxm.viewports.create(640, 480)
-    .appendTo($('body'));
+let $xxm = xxm.container.create('body')
+    .width('640px')
+    .height('480px');
 
-let $layer = xxm.layers.create($vp, 0)
-    .css('animation-iteration-count', 'infinite');
+let $mainLayer = xxm.layers.create($xxm, 0);
 
-let $tilemap = xxm.tilemaps.create($layer, 1)
+xxm.viewports.set($mainLayer);
+
+let $tilemap = xxm.tilemaps.create($mainLayer, 1)
+    .addClass('xxmPixelated xxmZoom')
     .css('background-image', 'url("test.png")');
 
-xxm.cssVar.set($tilemap[0], 'w', 30);
-xxm.cssVar.set($tilemap[0], 'h', 20);
+xxm.cssVar.set($tilemap[0], { w: 30, h: 20 });
 
 for(let i = 0; i < 2; ++i) {
     let j = i * 3;
@@ -51,7 +53,8 @@ xxm.events.create({
     ],
 });
 
-let $hero = xxm.sprites.create($tilemap, 2, 1, 5);
+let $hero = xxm.sprites.create($tilemap, 2, 1, 5)
+    .addClass('xxmViewportTarget');
 
 xxm.pc.select($hero);
 

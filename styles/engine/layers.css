@@ -1,9 +1,3 @@
-.xxmLayers {
-    position: relative;
-
-    image-rendering: pixelated;
-}
-
 .xxmLayer {
     position: absolute;
 
