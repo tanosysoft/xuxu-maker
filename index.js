@@ -13,7 +13,7 @@ console.log(h('script', {
 }).outerHTML);
 
 console.log(h('script', {
-    src: 'http://cdnjs.cloudflare.com/ajax/libs/q.js/1.4.1/q.min.js'
+    src: 'https://cdnjs.cloudflare.com/ajax/libs/q.js/1.4.1/q.min.js'
 }).outerHTML);
 
 [...scriptTags, ...stylesheetLinkTags].forEach(
