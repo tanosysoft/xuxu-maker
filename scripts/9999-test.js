@@ -66,6 +66,30 @@ xxm.events.create({
     ],
 });
 
+let seBone = new Audio('se/Key.ogg');
+
+xxm.events.create({
+    id: 2,
+    name: 'bones',
+
+    $initialParent: $tilemap,
+    initialPos: [1, 4],
+
+    pages: [
+        {
+            spritesetId: 0,
+            trigger: 'step',
+            exec: ev => {
+                if(seBone.currentTime > 0 && !seBone.ended) {
+                    return;
+                }
+
+                seBone.play();
+            },
+        }
+    ],
+});
+
 let $hero = xxm.sprites.create($tilemap, 2, 1, 5)
     .addClass('xxmViewportTarget');
 

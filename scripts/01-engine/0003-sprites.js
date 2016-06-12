@@ -13,6 +13,22 @@ xxm.domWatcher.watch({
         let ssId = $el.attr('spriteset-id');
         let ss = xxm.db.spritesets[ssId];
 
+        if(!ss) {
+            if(ssId !== 0) {
+                console.error(`Invalid spriteset ID: ${ssId}`);
+            }
+
+            ss = {
+                name: 'null',
+
+                frameWidth: 32,
+                frameHeight: 32,
+                frameCount: 1,
+
+                solid: false,
+            };
+        }
+
         xxm.cssVar.set(el, {
             spritesetUrl: `url("${window.location}spritesets/${ss.name}.png")`,
 
@@ -34,6 +50,8 @@ xxm.domWatcher.watch({
                 walkDuration: ss.defaultWalkDuration || '0.5s',
             });
         }
+
+        $el[ss.solid? 'addClass' : 'removeClass']('xxmSolid');
     }
 });
 

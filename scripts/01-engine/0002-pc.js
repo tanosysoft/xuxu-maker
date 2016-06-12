@@ -83,6 +83,50 @@ $(() => {
     });
 });
 
+(function thisFn() {
+    requestAnimationFrame(thisFn);
+
+    if(!$currentEl) {
+        return;
+    }
+
+    if(!$lastEl || $currentEl[0] !== $lastEl[0]) {
+        lastElX = null;
+        lastElY = null;
+
+        $lastEl = $currentEl;
+    }
+
+    let x = xxm.cssVar.get($lastEl[0], 'x', 'int');
+    let y = xxm.cssVar.get($lastEl[0], 'y', 'int');
+
+    if(x === lastElX && y === lastElY) {
+        return;
+    }
+
+    if($lastEl.is('.xxmWalking')) {
+        return;
+    }
+
+    lastElX = x;
+    lastElY = y;
+
+    let $steppedSpr = $(xxm.sprites.filterByPos(
+        $lastEl.siblings('.xxmSprite'), x, y
+    ).toArray().find(el => {
+        let ev = $(el).data('xxmParentEvent');
+        return ev && ev.currentPage && ev.currentPage.trigger === 'step';
+    }));
+
+    let ev = $steppedSpr.data('xxmParentEvent');
+
+    if(!ev || !ev.currentPage.exec) {
+        return;
+    }
+
+    ev.currentPage.exec(ev);
+})();
+
 function getCssVar(n, type) {
     return xxm.cssVar.get($currentEl[0], n, type);
 }
@@ -91,10 +135,8 @@ function setCssVar(n, val) {
     xxm.cssVar.set($currentEl[0], n, val);
 }
 
-let raf = requestAnimationFrame;
-
-function control() {
-    raf(control);
+(function thisFn() {
+    requestAnimationFrame(thisFn);
 
     if(!$currentEl || direction === 'none' || $currentEl.is('.xxmWalking')) {
         return;
@@ -108,7 +150,7 @@ function control() {
     let $tm = $currentEl.closest('.xxmTilemap');
 
     let $tiles = $tm.children('.xxmTile');
-    let $sprs = $tm.children('.xxmSprite');
+    let $sprs = $tm.children('.xxmSprite.xxmSolid');
 
     let shouldMove = (
         xxm.tilemaps.testWalk($tiles, x, y, direction)
@@ -166,8 +208,9 @@ function control() {
             $currentEl.removeClass('xxmAnimate');
         }
     }
-}
+})();
 
-control();
+let $lastEl;
+let lastElX, lastElY;
 
 }

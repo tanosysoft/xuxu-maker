@@ -29,16 +29,9 @@ let updateEvent = ev => {
     }
 
     if(ev.$spr) {
-        if(!currentPage.spritesetId) {
-            ev.$spr.remove();
-            delete ev.$spr;
-        }
-        else {
-            ev.$spr.attr('spriteset-id', currentPage.spritesetId);
-        }
+        ev.$spr.attr('spriteset-id', currentPage.spritesetId);
     }
-    else
-    if(currentPage.spritesetId) {
+    else {
         ev.$spr = xxm.sprites.create(
             ev.$initialParent,
             currentPage.spritesetId,
@@ -47,9 +40,7 @@ let updateEvent = ev => {
         );
     }
 
-    if(ev.$spr) {
-        ev.$spr.data('xxmParentEvent', ev);
-    }
+    ev.$spr.data('xxmParentEvent', ev);
 };
 
 (function thisFn() {

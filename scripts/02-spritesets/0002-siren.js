@@ -10,4 +10,6 @@ exports.frameHeight = 48;
 exports.originX = 23;
 exports.originY = 15;
 
+exports.solid = true;
+
 }
