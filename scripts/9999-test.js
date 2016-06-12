@@ -107,12 +107,19 @@ xxm.pc.select($hero);
 
 let $uiLayer = xxm.layers.create($xxm, 0);
 
-let $wnd = $('<div>')
+let $mapNameWnd = $('<div>')
     .addClass('xxmWindow xxmBottomRightWindow');
 
-$wnd.text('謎の地下城');
+$mapNameWnd.text('謎の地下城');
 
-$uiLayer.append($wnd);
+$uiLayer.append($mapNameWnd);
+
+let $demoWnd = $('<div>')
+    .addClass('xxmWindow xxmTopRightWindow');
+
+$demoWnd.text('ＤＥＭＯ');
+
+$uiLayer.append($demoWnd);
 
 let bgm = new Audio('bgm/Dungeon5.ogg');
 
