@@ -34,7 +34,6 @@ xxm.tilemaps.createTile($tilemap, 10, 5, 5, 6);
 xxm.tilemaps.createTile($tilemap, 10, 4, 6, 4);
 xxm.tilemaps.createTile($tilemap, 10, 5, 6, 5);
 
-xxm.tilemaps.createTile($tilemap, 4, 3, 1, 4);
 xxm.tilemaps.createTile($tilemap, 15, 5, 7, 1);
 
 let seFlip = new Audio('se/Attack2.ogg');
@@ -77,7 +76,7 @@ xxm.events.create({
 
 let seBone = new Audio('se/Key.ogg');
 
-xxm.events.create({
+let evBones = xxm.events.create({
     id: 2,
     name: 'bones',
 
@@ -98,6 +97,8 @@ xxm.events.create({
         }
     ],
 });
+
+xxm.tilemaps.setTile(evBones.$spr, 4, 3);
 
 let $hero = xxm.sprites.create($tilemap, 2, 1, 5)
     .addClass('xxmViewportTarget');

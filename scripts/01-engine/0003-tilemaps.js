@@ -82,6 +82,16 @@ exports.createTile = ($parent, tsx, tsy, x, y) => {
     return $el;
 };
 
+exports.setTile = ($el, tsx, tsy) => {
+    $el = $($el);
+
+    $el.addClass('xxmTile');
+
+    xxm.cssVar.set($el[0], { tsx, tsy });
+
+    return $el;
+};
+
 exports.filterTilesByPos = ($tiles, x, y) => {
     return $tiles.filter((i, t) => {
         return x === xxm.cssVar.get(t, 'x', 'int')
