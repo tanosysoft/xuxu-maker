@@ -57,6 +57,7 @@ xxm.events.create({
 
                 (function thisFn() {
                     if(seFlip.ended) {
+                        seFlip.pause();
                         seFlip.currentTime = 0;
                     }
 
