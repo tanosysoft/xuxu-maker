@@ -2,6 +2,7 @@
     display: inline-block;
 
     border-image: url(../../system/windowBorders.png) 7;
+    border-style: solid;
 
     padding: 6px 8px;
 
