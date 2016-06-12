@@ -10,7 +10,7 @@ xxm.domWatcher.watch({
     fn: (el, ev) => {
         let $el = $(el);
 
-        let ssId = $el.attr('spriteset-id');
+        let ssId = parseInt($el.attr('spriteset-id'));
         let ss = xxm.db.spritesets[ssId];
 
         if(!ss) {
@@ -29,9 +29,14 @@ xxm.domWatcher.watch({
             };
         }
 
-        xxm.cssVar.set(el, {
-            spritesetUrl: `url("${window.location}spritesets/${ss.name}.png")`,
+        if(ss.name !== 'null') {
+            xxm.cssVar.set(
+                el, 'spritesetUrl',
+                `url("${window.location}spritesets/${ss.name}.png")`
+            );
+        }
 
+        xxm.cssVar.set(el, {
             ssfw: (ss.frameWidth || 32) + 'px',
             ssfh: (ss.frameHeight || 38) + 'px',
 

@@ -8,6 +8,8 @@ let keyDirection = 'none';
 let direction = 'none';
 let lastDirection = 'none';
 
+let hold = false;
+
 exports.select = $el => {
     $currentEl = $el;
 
@@ -38,7 +40,7 @@ $(() => {
     });
 
     xxm.pads.on('btnDown', btn => {
-        if(!'LURD'.includes(btn) || btn === keyDirection) {
+        if(hold || !'LURD'.includes(btn) || btn === keyDirection) {
             return;
         }
 
@@ -50,7 +52,12 @@ $(() => {
     });
 
     xxm.pads.on('btnDown', btn => {
-        if(btn !== 'Z' || !$currentEl || $currentEl.is('.xxmWalking')) {
+        if(
+            btn !== 'Z'
+            || hold
+            || !$currentEl
+            || $currentEl.is('.xxmWalking')
+        ) {
             return;
         }
 
@@ -79,7 +86,8 @@ $(() => {
             return;
         }
 
-        ev.currentPage.exec(ev);
+        hold = true;
+        Q.when(ev.currentPage.exec(ev)).then(() => hold = false);
     });
 });
 
@@ -124,7 +132,8 @@ $(() => {
         return;
     }
 
-    ev.currentPage.exec(ev);
+    hold = true;
+    Q.when(ev.currentPage.exec(ev)).then(() => hold = false);
 })();
 
 function getCssVar(n, type) {
@@ -138,7 +147,12 @@ function setCssVar(n, val) {
 (function thisFn() {
     requestAnimationFrame(thisFn);
 
-    if(!$currentEl || direction === 'none' || $currentEl.is('.xxmWalking')) {
+    if(
+        !$currentEl
+        || direction === 'none'
+        || hold
+        || $currentEl.is('.xxmWalking')
+    ) {
         return;
     }
 

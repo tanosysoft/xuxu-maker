@@ -51,16 +51,25 @@ xxm.events.create({
             spritesetId: 1,
             trigger: 'action',
             exec: ev => {
-                if(seFlip.ended) {
-                    seFlip.currentTime = 0;
-                }
-
-                if(ev.$spr.is('.animated') || seFlip.currentTime !== 0) {
-                    return;
-                }
-
                 xxm.cssAnimations.add(ev.$spr, 'flip');
                 seFlip.play();
+
+                let deferred = Q.defer();
+
+                (function thisFn() {
+                    if(seFlip.ended) {
+                        seFlip.currentTime = 0;
+                    }
+
+                    if(ev.$spr.is('.animated') || seFlip.currentTime !== 0) {
+                        requestAnimationFrame(thisFn);
+                        return;
+                    }
+
+                    deferred.resolve();
+                })();
+
+                return deferred.promise;
             },
         },
     ],
