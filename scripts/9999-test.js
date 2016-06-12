@@ -37,6 +37,8 @@ xxm.tilemaps.createTile($tilemap, 10, 5, 6, 5);
 xxm.tilemaps.createTile($tilemap, 4, 3, 1, 4);
 xxm.tilemaps.createTile($tilemap, 15, 5, 7, 1);
 
+let seFlip = new Audio('se/Attack2.ogg');
+
 xxm.events.create({
     id: 1,
     name: 'chara1',
@@ -48,7 +50,10 @@ xxm.events.create({
         {
             spritesetId: 1,
             trigger: 'action',
-            exec: ev => xxm.cssAnimations.add(ev.$spr, 'flip'),
+            exec: ev => {
+                xxm.cssAnimations.add(ev.$spr, 'flip');
+                seFlip.play();
+            },
         },
     ],
 });
