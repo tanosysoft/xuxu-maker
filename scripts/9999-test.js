@@ -63,8 +63,18 @@ let $uiLayer = xxm.layers.create($xxm, 0);
 let $wnd = $('<div>')
     .addClass('xxmWindow xxmBottomRightWindow');
 
-$wnd.text('これはテストメセージです');
+$wnd.text('謎の地下城');
 
 $uiLayer.append($wnd);
+
+let bgm = new Audio('bgm/Dungeon5.ogg');
+
+bgm.loop = true;
+
+bgm.play();
+
+$hero.click(() => {
+    bgm.paused? bgm.play() : bgm.pause();
+});
 
 });
