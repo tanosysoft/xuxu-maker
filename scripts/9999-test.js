@@ -94,6 +94,7 @@ let evBones = xxm.events.create({
                 }
 
                 seBone.play();
+                $('.xxm').toggleClass('xxmBoard');
             },
         }
     ],

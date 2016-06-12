@@ -12,6 +12,12 @@ body {
 
     border: 10px solid rgba(0, 0, 0, 0.2);
     border-radius: 6px;
+
+    transition: transform ease-out 0.5s;
+}
+
+.xxmBoard {
+    transform: perspective(200px) rotateX(10deg);
 }
 
 .margin-shake {
