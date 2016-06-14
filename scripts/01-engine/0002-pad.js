@@ -11,6 +11,10 @@ exports.on = (ev, fn) => {
     evListeners[ev].add(fn);
 };
 
+exports.off = (ev, fn) => {
+    evListeners[ev].delete(fn);
+};
+
 let pad = exports[0] = {};
 
 pad.btnsDown = {};

@@ -48,7 +48,13 @@ xxm.events.create({
     pages: [
         {
             spritesetId: 1,
+
             trigger: 'action',
+
+            checkConditions: ev => {
+                return !ev.isItAllOverYet;
+            },
+
             exec: ev => {
                 xxm.cssAnimations.add(ev.$spr, 'flip');
                 seFlip.play();
@@ -67,9 +73,33 @@ xxm.events.create({
                     }
 
                     deferred.resolve();
+
+                    ev.isItAllOverYet = true;
                 })();
 
-                return deferred.promise;
+                let [$msgBox, msgPromise] = xxm.messageBox.show(
+                    $uiLayer, ["You've completed the quest, congratulations!"]
+                );
+
+                $msgBox.addClass('xxmBottomWindow xxmWaitCursor');
+
+                return Q.all([deferred.promise, msgPromise]);
+            },
+        },
+
+        {
+            spritesetId: 2,
+
+            trigger: 'action',
+
+            exec: ev => {
+                let [$msgBox, msgPromise] = xxm.messageBox.show(
+                    $uiLayer, ["Now I'm your evil twin. It's all over for you."]
+                );
+
+                $msgBox.addClass('xxmBottomWindow xxmWaitCursor');
+
+                return msgPromise;
             },
         },
     ],
@@ -110,7 +140,7 @@ xxm.pc.select($hero);
 let $uiLayer = xxm.layers.create($xxm, 0);
 
 let $mapNameWnd = $('<div>')
-    .addClass('xxmWindow xxmBottomRightWindow');
+    .addClass('xxmWindow xxmTopLeftWindow');
 
 $mapNameWnd.text('謎の地下城');
 

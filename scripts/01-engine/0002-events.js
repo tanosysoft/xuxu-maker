@@ -10,7 +10,7 @@ exports.clear = () => {
 
 let updateEvent = ev => {
     let currentPage = ev.pages.find(
-        page => !page.checkConditions || page.checkConditions()
+        page => !page.checkConditions || page.checkConditions(ev)
     );
 
     if(currentPage === ev.currentPage) {
