@@ -93,9 +93,10 @@ xxm.events.create({
             trigger: 'action',
 
             exec: ev => {
-                let [$msgBox, msgPromise] = xxm.messageBox.show(
-                    $uiLayer, ["Now I'm your evil twin. It's all over for you."]
-                );
+                let [$msgBox, msgPromise] = xxm.messageBox.show($uiLayer, [
+                    "Actually I was your evil twin all along! ",
+                    "It's all over for you now!",
+                ]);
 
                 $msgBox.addClass('xxmFatMessageBox xxmBottomWindow xxmWaitCursor');
 
