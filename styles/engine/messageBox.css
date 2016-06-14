@@ -1,0 +1,22 @@
+.xxmWaitCursor.xxmWaiting:after {
+    content: '';
+
+    position: relative;
+
+    top: 1px;
+
+    display: inline-block;
+
+    width: 16px;
+    height: 8px;
+
+    margin-left: 4px;
+
+    background-image: url(../../system/waitCursor.png);
+    background-repeat: no-repeat;
+    background-position: center;
+
+    animation-duration: 3s;
+    animation-name: flash;
+    animation-iteration-count: infinite;
+}
