@@ -163,4 +163,6 @@ $hero.click(() => {
     bgm.paused? bgm.play() : bgm.pause();
 });
 
+new Image().src = 'system/waitCursor.png';
+
 });
