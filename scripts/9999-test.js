@@ -81,7 +81,7 @@ xxm.events.create({
                     $uiLayer, ["You've completed the quest, congratulations!"]
                 );
 
-                $msgBox.addClass('xxmBottomWindow xxmWaitCursor');
+                $msgBox.addClass('xxmFatMessageBox xxmBottomWindow xxmWaitCursor');
 
                 return Q.all([deferred.promise, msgPromise]);
             },
@@ -97,7 +97,7 @@ xxm.events.create({
                     $uiLayer, ["Now I'm your evil twin. It's all over for you."]
                 );
 
-                $msgBox.addClass('xxmBottomWindow xxmWaitCursor');
+                $msgBox.addClass('xxmFatMessageBox xxmBottomWindow xxmWaitCursor');
 
                 return msgPromise;
             },
