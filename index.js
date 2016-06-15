@@ -2,7 +2,7 @@
 
 let h = require('hyperscript');
 
-let scriptTags = require('./scriptTags');
+let libScriptTags = require('./libScriptTags');
 let stylesheetLinkTags = require('./stylesheetLinkTags');
 
 console.log('<!doctype html>');
@@ -16,6 +16,6 @@ console.log(h('script', {
     src: 'https://cdnjs.cloudflare.com/ajax/libs/q.js/1.4.1/q.min.js'
 }).outerHTML);
 
-[...scriptTags, ...stylesheetLinkTags].forEach(
+[...libScriptTags, ...stylesheetLinkTags].forEach(
     el => console.log(el.outerHTML)
 );
