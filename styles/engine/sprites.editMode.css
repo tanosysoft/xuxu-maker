@@ -1,0 +1,31 @@
+.xxmEditMode .xxmSprite {
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.xxmEditMode .xxmSpriteInternal {
+    pointer-events: none;
+}
+
+.xxmEditMode .xxmSprite:after {
+    content: '';
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    --shadowColor: blue;
+    box-shadow: inset 0 0 10px var(--shadowColor);
+
+    z-index: 9999;
+}
+
+.xxmEditMode .xxmSprite:hover {
+    overflow: visible;
+}
+
+.xxmEditMode .xxmSprite:hover:after {
+    --shadowColor: red;
+}
