@@ -37,6 +37,7 @@ xxm.tilemaps.createTile($tilemap, 10, 5, 6, 5);
 xxm.tilemaps.createTile($tilemap, 15, 5, 7, 1);
 
 let seFlip = new Audio('se/Attack2.ogg');
+let seTransform = new Audio('se/Absorb1.ogg');
 
 xxm.events.create({
     id: 1,
@@ -56,34 +57,35 @@ xxm.events.create({
             },
 
             exec: ev => {
-                xxm.cssAnimations.add(ev.$spr, 'flip');
+                xxm.cssAnimations.add(ev.$spr, 'flip', '0.8s');
                 seFlip.play();
 
                 let deferred = Q.defer();
 
                 (function thisFn() {
-                    if(seFlip.ended) {
-                        seFlip.pause();
-                        seFlip.currentTime = 0;
-                    }
-
-                    if(ev.$spr.is('.animated') || seFlip.currentTime !== 0) {
+                    if(ev.$spr.is('.animated')) {
                         requestAnimationFrame(thisFn);
                         return;
                     }
 
-                    deferred.resolve();
+                    setTimeout(() => {
+                        seTransform.play();
 
-                    ev.isItAllOverYet = true;
+                        xxm.cssAnimations.add(ev.$spr, 'flash', '0.2s', 4);
+
+                        ev.isItAllOverYet = true;
+
+                        let [$msgBox, msgPromise] = xxm.messageBox.show(
+                            $uiLayer, ["You've completed the quest, congratulations!"]
+                        );
+
+                        $msgBox.addClass('xxmFatMessageBox xxmBottomWindow xxmWaitCursor');
+
+                        deferred.resolve(msgPromise);
+                    }, 150);
                 })();
 
-                let [$msgBox, msgPromise] = xxm.messageBox.show(
-                    $uiLayer, ["You've completed the quest, congratulations!"]
-                );
-
-                $msgBox.addClass('xxmFatMessageBox xxmBottomWindow xxmWaitCursor');
-
-                return Q.all([deferred.promise, msgPromise]);
+                return deferred.promise;
             },
         },
 
@@ -94,7 +96,7 @@ xxm.events.create({
 
             exec: ev => {
                 let [$msgBox, msgPromise] = xxm.messageBox.show($uiLayer, [
-                    "Actually I was your evil twin all along! ",
+                    "Actually, I was your evil twin all along! ",
                     "It's all over for you now!",
                 ]);
 
