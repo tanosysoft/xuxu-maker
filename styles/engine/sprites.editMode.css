@@ -16,16 +16,19 @@
     right: 0;
     bottom: 0;
 
-    --shadowColor: blue;
-    box-shadow: inset 0 0 10px var(--shadowColor);
-
-    z-index: 9999;
+    --shadowColor: rgba(255, 255, 255, 0.7);
+    box-shadow: inset 3px 3px 0 var(--shadowColor),
+        inset -3px -3px 0 var(--shadowColor);
 }
 
 .xxmEditMode .xxmSprite:hover {
     overflow: visible;
 }
 
+.xxmEditMode .xxmSprite:hover .xxmSpriteInternal {
+    filter: hue-rotate(90deg);
+}
+
 .xxmEditMode .xxmSprite:hover:after {
-    --shadowColor: red;
+    --shadowColor: rgba(0, 0, 0, 0.5);
 }
