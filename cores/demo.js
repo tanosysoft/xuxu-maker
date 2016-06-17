@@ -139,9 +139,14 @@ let $hero = xxm.sprites.create($tilemap, 2, 1, 5)
 xxm.pc.select($hero);
 
 let $transLayer = xxm.layers.create($xxm, 0)
-    .addClass('xxmTransitionLayer');
+    .addClass('xxmTransitionLayer')
+    .css('animation-play-state', 'paused');
 
 xxm.cssAnimations.add($transLayer, 'xxmSquareFadeIn');
+
+$(window).on('load', () => {
+    $transLayer.css('animation-play-state', 'running');
+});
 
 let $uiLayer = xxm.layers.create($xxm, 0);
 
