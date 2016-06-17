@@ -138,14 +138,12 @@ let $hero = xxm.sprites.create($tilemap, 2, 1, 5)
 
 xxm.pc.select($hero);
 
-let $transLayer = xxm.layers.create($xxm, 0)
-    .addClass('xxmTransitionLayer')
-    .css('animation-play-state', 'paused');
+let bgm = new Audio('bgm/Dungeon5.ogg');
 
-xxm.cssAnimations.add($transLayer, 'xxmSquareFadeIn');
+bgm.loop = true;
 
-$(window).on('load', () => {
-    $transLayer.css('animation-play-state', 'running');
+$hero.click(() => {
+    bgm.paused? bgm.play() : bgm.pause();
 });
 
 let $uiLayer = xxm.layers.create($xxm, 0);
@@ -164,16 +162,17 @@ $demoWnd.text('ＤＥＭＯ');
 
 $uiLayer.append($demoWnd);
 
-let bgm = new Audio('bgm/Dungeon5.ogg');
-
-bgm.loop = true;
-
-bgm.play();
-
-$hero.click(() => {
-    bgm.paused? bgm.play() : bgm.pause();
-});
-
 new Image().src = 'system/waitCursor.png';
+
+let $transLayer = xxm.layers.create($xxm, 0)
+    .addClass('xxmTransitionLayer')
+    .css('animation-play-state', 'paused');
+
+xxm.cssAnimations.add($transLayer, 'xxmSquareFadeIn');
+
+$(window).on('load', () => {
+    $transLayer.css('animation-play-state', 'running');
+    bgm.play();
+});
 
 });
