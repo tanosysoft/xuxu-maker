@@ -1,8 +1,6 @@
 'use strict'; $(() => {
 
-let $xxm = xxm.container.create('body')
-    .width('640px')
-    .height('480px');
+let $xxm = xxm.container.create('body', 640, 480);
 
 let $mainLayer = xxm.layers.create($xxm, 0);
 
@@ -139,6 +137,11 @@ let $hero = xxm.sprites.create($tilemap, 2, 1, 5)
     .addClass('xxmViewportTarget');
 
 xxm.pc.select($hero);
+
+let $transLayer = xxm.layers.create($xxm, 0)
+    .addClass('xxmTransitionLayer');
+
+xxm.cssAnimations.add($transLayer, 'xxmSquareFadeIn');
 
 let $uiLayer = xxm.layers.create($xxm, 0);
 

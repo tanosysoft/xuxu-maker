@@ -1,8 +1,6 @@
 'use strict'; $(() => {
 
-let $xxm = xxm.container.create('body')
-    .width('640px')
-    .height('480px')
+let $xxm = xxm.container.create('body', 640, 480)
     .addClass('xxmEditMode');
 
 let $mainLayer = xxm.layers.create($xxm, 0)

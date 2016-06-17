@@ -13,6 +13,8 @@ body {
 
 .xxm {
     position: relative;
+    width: var(--xxmw);
+    height: var(--xxmh);
 }
 
 .xxmZoom {

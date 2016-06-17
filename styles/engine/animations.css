@@ -1,0 +1,21 @@
+@keyframes xxmSquareFadeIn {
+    from {
+        box-shadow: inset calc(var(--shadowWidth)) calc(var(--shadowHeight)) 0 var(--shadowColor),
+            inset calc(-1 * var(--shadowWidth)) calc(-1 * var(--shadowHeight)) 0 var(--shadowColor);
+    }
+
+    to {
+        box-shadow: inset 0 0 0 var(--shadowColor);
+    }
+}
+
+.animated.xxmSquareFadeIn {
+    animation-name: xxmSquareFadeIn;
+    animation-timing-function: linear;
+    animation-duration: 1.5s;
+
+    --shadowColor: black;
+
+    --shadowWidth: (var(--xxmw) / 2);
+    --shadowHeight: (var(--xxmh) / 2);
+}
