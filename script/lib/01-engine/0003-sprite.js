@@ -32,7 +32,7 @@ xxm.domWatcher.watch({
         if(ss.name !== 'null') {
             xxm.cssVar.set(
                 el, 'spritesetUrl', 'url("' +
-                    xxm.fullUrl(`spriteset/${ss.name}.png`) +
+                    xxm.fullUrl(`data/spriteset/${ss.name}.png`) +
                 '")'
             );
         }

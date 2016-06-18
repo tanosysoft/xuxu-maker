@@ -21,7 +21,7 @@ xxm.domWatcher.watch({
 
         xxm.cssVar.set(
             el, 'tilesetUrl', 'url("' +
-                xxm.fullUrl(`tileset/${ts.name}.png`) +
+                xxm.fullUrl(`data/tileset/${ts.name}.png`) +
             '")'
         );
     }

@@ -11,7 +11,7 @@ xxm.viewports.set($mainLayer);
 
 let $tilemap = xxm.tilemaps.create($mainLayer, 1)
     .addClass('xxmPixelated xxmZoom')
-    .css('background-image', 'url("test.png")');
+    .css('background-image', 'url("data/test.png")');
 
 xxm.cssVar.set($tilemap[0], { w: 30, h: 20 });
 
@@ -37,8 +37,8 @@ xxm.tilemaps.createTile($tilemap, 10, 5, 6, 5);
 
 xxm.tilemaps.createTile($tilemap, 15, 5, 7, 1);
 
-let seFlip = new Audio('se/Attack2.ogg');
-let seTransform = new Audio('se/Absorb1.ogg');
+let seFlip = new Audio('data/se/Attack2.ogg');
+let seTransform = new Audio('data/se/Absorb1.ogg');
 
 xxm.events.create({
     id: 1,
@@ -109,7 +109,7 @@ xxm.events.create({
     ],
 });
 
-let seBone = new Audio('se/Key.ogg');
+let seBone = new Audio('data/se/Key.ogg');
 
 let evBones = xxm.events.create({
     id: 2,

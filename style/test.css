@@ -4,7 +4,7 @@ body {
     align-items: center;
     justify-content: center;
 
-    background-image: url('../bg.png');
+    background-image: url('../data/bg.png');
 }
 
 .xxm {
