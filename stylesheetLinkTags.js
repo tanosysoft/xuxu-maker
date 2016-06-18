@@ -9,7 +9,7 @@ let h = require('hyperscript');
 
 let rootDir = __dirname;
 
-module.exports = glob.sync(rootDir + '/styles/**/*.css').map(
+module.exports = glob.sync(rootDir + '/style/**/*.css').map(
     path => h('link', {
         rel: 'stylesheet',
         href: relPath(rootDir, path),
