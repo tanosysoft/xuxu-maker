@@ -8,15 +8,20 @@ exports.create = ($parent, w, h) => {
     let $el = $('<div>')
         .addClass('xxm');
 
-    let whProps = { xxmw: w, xxmh: h };
+    let cssVars = {
+        xxmw: w,
+        xxmh: h,
+        tw: '32px',
+        th: '32px',
+    };
 
     ['xxmw', 'xxmh'].forEach(k => {
-        if(typeof whProps[k] === 'number') {
-            whProps[k] += 'px';
+        if(typeof cssVars[k] === 'number') {
+            cssVars[k] += 'px';
         }
     });
 
-    xxm.cssVar.set($el[0], whProps);
+    xxm.cssVar.set($el[0], cssVars);
 
     $parent.append($el);
 

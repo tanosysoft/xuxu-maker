@@ -2,12 +2,6 @@
 
 let exports = xxm.tilemaps = {};
 
-$(() => {
-    ['tw', 'th'].forEach(
-        n => xxm.cssVar.set(document.body, n, '32px')
-    );
-});
-
 xxm.domWatcher.watch({
     added: true,
     attr: 'tileset-id',
