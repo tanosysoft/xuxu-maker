@@ -153,7 +153,7 @@ $demoWnd.text('ＤＥＭＯ');
 
 $uiLayer.append($demoWnd);
 
-new Image().src = 'system/waitCursor.png';
+new Image().src = 'data/system/waitCursor.png';
 
 let $hero = xxm.sprites.create($tilemap, 2, 1, 5)
     .addClass('xxmViewportTarget');
