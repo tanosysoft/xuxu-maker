@@ -4,7 +4,7 @@ $(() => {
     let coreName = location.hash.slice(1);
 
     $('head').append(
-        $('<script>').attr('src', `core/${coreName}`)
+        $('<script>').attr('src', `script/core/${coreName}`)
     );
 });
 
