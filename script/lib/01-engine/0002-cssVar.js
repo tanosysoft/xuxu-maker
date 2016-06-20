@@ -77,3 +77,26 @@ exports.setIfUnset = function() {
 
     exports.set(el, name, args.val);
 };
+
+exports.unset = (el, name) => {
+    if(Array.isArray(name)) {
+        name.forEach(name => {
+            exports.unset(el, name);
+        });
+
+        return;
+    }
+
+    let originalStyle = el.style.cssText.trim();
+
+    if(originalStyle && !originalStyle.endsWith(';')) {
+        originalStyle += ';';
+    }
+
+    let re = new RegExp(`((^| *;| )--${name} *): *([^;$]+)`, 'g');
+    let reRes = re.exec(originalStyle);
+
+    if(reRes) {
+        el.style = originalStyle.replace(re, '');
+    }
+};

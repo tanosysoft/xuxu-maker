@@ -3,6 +3,7 @@
 xxm.db = {
     tilesets: {},
     spritesets: {},
+    maps: {},
 };
 
 }

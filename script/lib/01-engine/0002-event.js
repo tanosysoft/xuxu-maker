@@ -38,6 +38,17 @@ let updateEvent = ev => {
             ev.initialPos[0],
             ev.initialPos[1]
         );
+
+        ev.$spr.addClass(`xxmEv${ev.id}`);
+    }
+
+    if(!currentPage.spritesetId && currentPage.tsCoords) {
+        xxm.tilemaps.setTile(
+            ev.$spr, currentPage.tsCoords[0], currentPage.tsCoords[1]
+        );
+    }
+    else {
+        xxm.tilemaps.unsetTile(ev.$spr);
     }
 
     ev.$spr.data('xxmParentEvent', ev);
@@ -57,6 +68,12 @@ exports.create = ev => {
     updateEvent(ev);
 
     return ev;
+};
+
+exports.pageByName = (ev, pageName) => {
+    return ev.pages.find(page => {
+        return (page.name === pageName);
+    });
 };
 
 }

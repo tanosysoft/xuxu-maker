@@ -88,6 +88,12 @@ exports.setTile = ($el, tsx, tsy) => {
     return $el;
 };
 
+exports.unsetTile = $el => {
+    $el.removeClass('xxmTile');
+
+    xxm.cssVar.unset($el[0], ['tsx', 'tsy']);
+};
+
 exports.filterTilesByPos = ($tiles, x, y) => {
     return $tiles.filter((i, t) => {
         return x === xxm.cssVar.get(t, 'x', 'int')
