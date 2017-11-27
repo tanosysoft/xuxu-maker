@@ -2,7 +2,7 @@
 
 No time to explain. Code is worth a thousand words.
 
-Demo: https://n2liquid.github.io/xuxu-maker/#demo.js
+Demo: https://tanosysoft.github.io/xuxu-maker/#demo.js
 
 ## License
 
